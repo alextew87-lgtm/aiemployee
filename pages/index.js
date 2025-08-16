@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 
-const WEBHOOK_URL = "https://your-n8n-host/webhook/aiemployee-lead"; // TODO: replace
+const WEBHOOK_URL = "/api/lead";
 
 const Field = ({ label, required = false, children }) => (
   <label className="block mb-4">
