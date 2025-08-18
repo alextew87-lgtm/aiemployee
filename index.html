@@ -11,6 +11,98 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aiemployee.by/">
   <link rel="stylesheet" href="assets/css/styles.css?v=build-20250818T195735Z">
+
+  <!-- AiEmployee Hybrid Palette (inline overrides) -->
+  <style>
+    :root{
+      --color-primary:#1D4ED8;         /* light CTA */
+      --color-hero-cta:#7C3AED;        /* hero CTA (indigo) */
+      --color-accent:#00D1FF;          /* decorative only */
+
+      --color-base:#F5F5F7;            /* page/section background */
+      --color-text:#1D1D1F;            /* headings, primary text */
+      --color-muted:#6E6E73;           /* secondary text */
+      --color-border:#D2D2D7;          /* hairlines */
+
+      --color-hero:#000000;            /* black hero/footer */
+      --color-surface:#111111;         /* dark cards on hero */
+      --color-white:#FFFFFF;
+    }
+    /* Base */
+    html, body { background: var(--color-base); color: var(--color-text); }
+    a { color: var(--color-primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Header */
+    header.site { background: #fff; border-bottom: 1px solid var(--color-border); }
+    header.site .row { align-items: center; }
+    header.site nav a { color: var(--color-muted); }
+    header.site nav a.btn { color: #fff; } /* CTA in header stays primary */
+
+    /* Buttons */
+    .btn { background: var(--color-primary); color: #fff; border: 0; border-radius: 14px; padding: 10px 16px; }
+    .btn:hover { filter: brightness(0.92); }
+    .btn.secondary { background: transparent; color: var(--color-text); border: 1px solid var(--color-border); }
+    .btn.ghost { background: transparent; color: var(--color-text); border: 1px solid var(--color-border); }
+    .btn.add { background: var(--color-primary); color: #fff; }
+
+    /* Hero */
+    .hero { background: var(--color-hero) !important; color: #fff; }
+    .hero h1, .hero p { color: #fff; }
+    .hero .btn { background: var(--color-hero-cta); color: #fff; }
+    .hero .btn.secondary { background: transparent; color: rgba(255,255,255,.92); border: 1px solid rgba(255,255,255,.18); }
+    .hero .cta { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* Sections */
+    .section { background: var(--color-base); }
+    .section h2 { color: var(--color-text); }
+    .muted, .section .muted, .section .small { color: var(--color-muted); }
+
+    /* Cards (catalog) */
+    .catalog .grid { gap: 18px; }
+    .card { background: #fff; border: 1px solid var(--color-border); border-radius: 18px; overflow: hidden; }
+    .card .body h3 { color: var(--color-text); }
+    .card .body .muted { color: var(--color-muted); }
+    .card .row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .badge { background: var(--color-primary); color: #fff; border-radius: 999px; padding: 4px 8px; font-size: 12px; }
+
+    /* Cases */
+    .casegrid { gap: 16px; }
+    .case { background: #fff; border: 1px solid var(--color-border); border-radius: 16px; padding: 16px; }
+    .case h3 { color: var(--color-text); }
+    .disclaimer { color: var(--color-muted); }
+    .disclaimer a { color: var(--color-primary); }
+
+    /* FAQ */
+    .faq details { background: #fff; border: 1px solid var(--color-border); border-radius: 14px; padding: 12px 14px; }
+    .faq summary { cursor: pointer; color: var(--color-text); }
+    .faq p { color: var(--color-muted); }
+
+    /* Footer */
+    .footer { background: var(--color-hero); color: #fff; }
+    .footer h3 { color: #fff; }
+    .footer a { color: #9ecbff; }
+    .footer .grid { gap: 16px; }
+
+    /* Floating Cart */
+    .float-cart { background: var(--color-primary); color: #fff; border: 0; border-radius: 999px; box-shadow: 0 8px 24px rgba(29,78,216,.35); }
+    .float-cart .count { background: #fff; color: var(--color-primary); }
+
+    /* Aside panel (lead form) */
+    .aside .panel { background: #fff; border-left: 1px solid var(--color-border); }
+    .aside .form label { color: var(--color-text); }
+    .aside .form input, .aside .form textarea {
+      background: #fff; color: var(--color-text);
+      border: 1px solid var(--color-border); border-radius: 12px; padding: 10px 12px;
+    }
+    .aside .form input::placeholder, .aside .form textarea::placeholder { color: var(--color-muted); }
+    .aside .form .btn#sendBtn { background: var(--color-primary); color: #fff; }
+
+    /* Focus ring */
+    :where(a, button, input, textarea, summary):focus { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+    [disabled] { opacity: .5; pointer-events: none; }
+  </style>
+
 </head>
 <body>
   <!-- build-20250818T195735Z -->
