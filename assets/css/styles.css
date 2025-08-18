@@ -1,3 +1,50 @@
+:root{
+  /* AiEmployee Hybrid palette (Apple neutrals + cobalt/indigo) */
+  --color-primary:#1D4ED8;
+  --color-hero-cta:#7C3AED;
+  --color-accent:#00D1FF; /* decorative */
+
+  --color-base:#F5F5F7;
+  --color-text:#1D1D1F;
+  --color-muted:#6E6E73;
+  --color-border:#2A2A2A; /* dark border */
+
+  --color-hero:#000000;
+  --color-surface:#111111;
+  --color-white:#FFFFFF;
+
+  --success:#16A34A; --warning:#F59E0B; --error:#EF4444;
+}
+
+/* Map site tokens -> new palette */
+:root{
+  --bg: var(--color-hero);
+  --panel: var(--color-surface);
+  --card: var(--color-surface);
+  --text: #E8EAEE;            /* light text for dark bg */
+  --muted: #A6AAB4;           /* muted on dark */
+  --accent: var(--color-primary);
+}
+
+/* Hero CTA uses indigo */
+.hero .btn:first-child{background:var(--color-hero-cta)}
+/* Optional decorative underline */
+.accent-line{background:var(--color-accent)} 
+/* Focus ring */
+:root{ --focus-ring:2px solid var(--color-primary) }
+*:focus{ outline:var(--focus-ring); outline-offset:2px }
+
+/* Utility classes from hybrid palette */
+.btn-primary{background:var(--color-primary);color:var(--color-white)}
+.btn-primary:hover{filter:brightness(.92)}
+.btn-hero{background:var(--color-hero-cta);color:var(--color-white)}
+.btn-hero:hover{filter:brightness(.92)}
+.link-primary{color:var(--color-primary)}
+.section-base{background:var(--color-base);color:var(--color-text)}
+.section-hero{background:var(--color-hero);color:var(--color-white)}
+.text-muted{color:var(--muted)}
+.border-base{border-color:var(--color-border)}
+
 
 :root{--bg:#0e0f12;--panel:#15171c;--card:#191c22;--text:#dfe3ec;--muted:#a9b4c7;--accent:#4da3ff}
 *{box-sizing:border-box}html,body{margin:0;padding:0}
