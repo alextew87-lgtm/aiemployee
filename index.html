@@ -5,15 +5,24 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>AiEmployee — виртуальные сотрудники для бизнеса</title>
   <link rel="canonical" href="https://aiemployee.by/">
-  <meta name="theme-color" content="#0e0f12">
+  <meta name="theme-color" content="#ffffff">
   <meta property="og:title" content="AiEmployee — виртуальные сотрудники для бизнеса">
   <meta property="og:description" content="Соберите команду из AI‑сотрудников: администратор, продажи, SMM, копирайтер, дизайнер, ассистент, аналитик, юрист, финансист, техподдержка.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aiemployee.by/">
-  <link rel="stylesheet" href="assets/css/styles.css?v=build-20250818T210929Z">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20250818215817">
+  <link rel="stylesheet" href="assets/css/styles_additions.css?v=20250818215817">
+  <style>
+    /* hero grid to place artwork on the right */
+    .hero .container { display:grid; grid-template-columns: 1fr minmax(520px, 640px); gap: 28px; align-items:center; }
+    .hero-art picture, .hero-art img { width:100%; height:auto; display:block; }
+    @media (max-width: 960px) {
+      .hero .container { grid-template-columns: 1fr; }
+      .hero-art { order: 2; }
+    }
+  </style>
 </head>
 <body>
-  <!-- build-20250818T210929Z -->
   <header class="site">
     <div class="container row">
       <div><strong>AiEmployee</strong></div>
@@ -27,285 +36,25 @@
     </div>
   </header>
 
-  <section class="hero section-hero" id="home">
+  <section class="hero" id="home">
     <div class="container">
-      <h1>AiEmployee — платформа для найма AI‑сотрудников</h1>
-      <p>Снижайте расходы до 90% и ускоряйте бизнес в 10 раз с помощью виртуальных сотрудников.</p>
-      <div class="cta">
-        <a class="btn btn-hero" href="#catalog">Познакомиться с AI‑командой</a>
-        <a class="btn secondary" href="#how">Как это работает</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="how">
-    <div class="container">
-      <h2>Как это работает</h2>
-      <div class="accent-line"></div>
-      <ol class="steps">
-        <li>Выберите сотрудников в каталоге.</li>
-        <li>Подключите к бизнесу мессенджеры, CRM и e‑mail.</li>
-        <li>Получайте результат — они начинают работать сразу.</li>
-      </ol>
-
-      <h2 style="margin-top:22px">Преимущества</h2>
-      <div class="accent-line"></div>
-      <div class="bullets">
-        <div class="item"><b>Экономия до 90% на зарплатах</b> — без лишних расходов на найм и HR.</div>
-        <div class="item"><b>Рост эффективности в 5–10 раз</b> — скорость обработки задач в секунды.</div>
-        <div class="item"><b>Доступ 24/7</b> — сотрудники всегда готовы к работе.</div>
-        <div class="item"><b>Проактивность</b> — дают развёрнутые ответы, советуют решения.</div>
-        <div class="item"><b>Всегда в нужном тоне</b> — поддерживают заданный стиль общения.</div>
-        <div class="item"><b>Обучаемость</b> — осваивают материалы за секунды.</div>
-        <div class="item"><b>Идеальная память</b> — помнят всё, что вы сообщали ранее.</div>
-        <div class="item"><b>Удобная интеграция</b> — запуск за минуты.</div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section catalog" id="catalog">
-    <div class="container">
-      <h2>Каталог сотрудников (ТОП‑10)</h2>
-      <div class="accent-line"></div>
-      <div class="grid">
-
-        <article class="card" data-id="alena">
-          <figure><span class="badge">AI</span>
-            <img src="assets/img/alyona.webp" alt="Алёна — AI‑администратор" loading="eager">
-          </figure>
-          <div class="body">
-            <h3>Алёна — AI‑администратор</h3>
-            <div class="muted">Принимает заявки, ведёт расписание, напоминает клиентам.</div>
-            <div class="row">
-              <button class="btn add btn-primary">Добавить в команду</button>
-              <a class="btn ghost" href="https://t.me/aiemployee_by" target="_blank" rel="noopener">Пообщаться сейчас</a>
-            </div>
-            <p class="small">Перейти в Telegram чат для общения с сотрудником</p>
-          </div>
-        </article>
-
-        <article class="card" data-id="lev">
-          <figure><span class="badge">AI</span>
-            <img src="assets/img/lev.webp" alt="Лев — AI‑менеджер по продажам" loading="eager">
-          </figure>
-          <div class="body">
-            <h3>Лев — AI‑менеджер по продажам</h3>
-            <div class="muted">Отвечает на вопросы и помогает закрывать сделки.</div>
-            <div class="row">
-              <button class="btn add btn-primary">Добавить в команду</button>
-              <a class="btn ghost" href="https://t.me/aiemployee_by" target="_blank" rel="noopener">Пообщаться сейчас</a>
-            </div>
-            <p class="small">Перейти в Telegram чат для общения с сотрудником</p>
-          </div>
-        </article>
-
-        <article class="card" data-id="mark">
-          <figure><span class="badge">AI</span>
-            <img src="assets/img/mark.webp" alt="Марк — AI‑SMM‑менеджер" loading="lazy">
-          </figure>
-          <div class="body">
-            <h3>Марк — AI‑SMM‑менеджер</h3>
-            <div class="muted">Создаёт посты, сторис и ведёт соцсети.</div>
-            <div class="row">
-              <button class="btn add btn-primary">Добавить в команду</button>
-              <a class="btn ghost" href="https://t.me/aiemployee_by" target="_blank" rel="noopener">Пообщаться сейчас</a>
-            </div>
-            <p class="small">Перейти в Telegram чат для общения с сотрудником</p>
-          </div>
-        </article>
-
-        <article class="card" data-id="sonya">
-          <figure><span class="badge">AI</span>
-            <img src="assets/img/sonya.webp" alt="Соня — AI‑копирайтер" loading="lazy">
-          </figure>
-          <div class="body">
-            <h3>Соня — AI‑копирайтер</h3>
-            <div class="muted">Тексты для рекламы, сайта и e‑mail.</div>
-            <div class="row">
-              <button class="btn add btn-primary">Добавить в команду</button>
-              <a class="btn ghost" href="https://t.me/aiemployee_by" target="_blank" rel="noopener">Пообщаться сейчас</a>
-            </div>
-            <p class="small">Перейти в Telegram чат для общения с сотрудником</p>
-          </div>
-        </article>
-
-        <article class="card" data-id="ira">
-          <figure><span class="badge">AI</span>
-            <img src="assets/img/ira.webp" alt="Ира — AI‑дизайнер" loading="lazy">
-          </figure>
-          <div class="body">
-            <h3>Ира — AI‑дизайнер</h3>
-            <div class="muted">Баннеры, визуалы и презентации.</div>
-            <div class="row">
-              <button class="btn add btn-primary">Добавить в команду</button>
-              <a class="btn ghost" href="https://t.me/aiemployee_by" target="_blank" rel="noopener">Пообщаться сейчас</a>
-            </div>
-            <p class="small">Перейти в Telegram чат для общения с сотрудником</p>
-          </div>
-        </article>
-
-        <article class="card" data-id="nadya">
-          <figure><span class="badge">AI</span>
-            <img src="assets/img/nadya.webp" alt="Надя — AI‑ассистент руководителя" loading="lazy">
-          </figure>
-          <div class="body">
-            <h3>Надя — AI‑ассистент руководителя</h3>
-            <div class="muted">Календарь, письма и документы.</div>
-            <div class="row">
-              <button class="btn add btn-primary">Добавить в команду</button>
-              <a class="btn ghost" href="https://t.me/aiemployee_by" target="_blank" rel="noopener">Пообщаться сейчас</a>
-            </div>
-            <p class="small">Перейти в Telegram чат для общения с сотрудником</p>
-          </div>
-        </article>
-
-        <article class="card" data-id="kirill">
-          <figure><span class="badge">AI</span>
-            <img src="assets/img/kirill.webp" alt="Кирилл — AI‑аналитик" loading="lazy">
-          </figure>
-          <div class="body">
-            <h3>Кирилл — AI‑аналитик</h3>
-            <div class="muted">Данные, отчёты и прогнозы.</div>
-            <div class="row">
-              <button class="btn add btn-primary">Добавить в команду</button>
-              <a class="btn ghost" href="https://t.me/aiemployee_by" target="_blank" rel="noopener">Пообщаться сейчас</a>
-            </div>
-            <p class="small">Перейти в Telegram чат для общения с сотрудником</p>
-          </div>
-        </article>
-
-        <article class="card" data-id="dmitry">
-          <figure><span class="badge">AI</span>
-            <img src="assets/img/dmitry.webp" alt="Дмитрий — AI‑юрист" loading="lazy">
-          </figure>
-          <div class="body">
-            <h3>Дмитрий — AI‑юрист</h3>
-            <div class="muted">Черновики договоров и проверка документов.</div>
-            <div class="row">
-              <button class="btn add btn-primary">Добавить в команду</button>
-              <a class="btn ghost" href="https://t.me/aiemployee_by" target="_blank" rel="noopener">Пообщаться сейчас</a>
-            </div>
-            <p class="small">Перейти в Telegram чат для общения с сотрудником</p>
-          </div>
-        </article>
-
-        <article class="card" data-id="konstantin">
-          <figure><span class="badge">AI</span>
-            <img src="assets/img/konstantin.webp" alt="Константин — AI‑финансист" loading="lazy">
-          </figure>
-          <div class="body">
-            <h3>Константин — AI‑финансист</h3>
-            <div class="muted">Бюджеты, калькуляция и отчёты.</div>
-            <div class="row">
-              <button class="btn add btn-primary">Добавить в команду</button>
-              <a class="btn ghost" href="https://t.me/aiemployee_by" target="_blank" rel="noopener">Пообщаться сейчас</a>
-            </div>
-            <p class="small">Перейти в Telegram чат для общения с сотрудником</p>
-          </div>
-        </article>
-
-        <article class="card" data-id="artyom">
-          <figure><span class="badge">AI</span>
-            <img src="assets/img/artyom.webp" alt="Артём — AI‑техподдержка" loading="lazy">
-          </figure>
-          <div class="body">
-            <h3>Артём — AI‑техподдержка</h3>
-            <div class="muted">Быстрые и вежливые ответы 24/7.</div>
-            <div class="row">
-              <button class="btn add btn-primary">Добавить в команду</button>
-              <a class="btn ghost" href="https://t.me/aiemployee_by" target="_blank" rel="noopener">Пообщаться сейчас</a>
-            </div>
-            <p class="small">Перейти в Telegram чат для общения с сотрудником</p>
-          </div>
-        </article>
-
-      </div>
-      <p class="disclaimer">Дополнительно: обучим AI‑сотрудника любой профессии по индивидуальному заказу.
-        <a href="#team" onclick="document.getElementById('floatOpen').click()">Отправить заявку на обучение</a>.
-      </p>
-    </div>
-  </section>
-
-  <section class="section section-base" id="cases">
-    <div class="container">
-      <h2>Кейсы внедрения AI‑сотрудников</h2>
-      <div class="accent-line"></div>
-      <div class="casegrid">
-        <article class="case">
-          <h3>Кейс 1. Замена администратора и менеджера по заявкам</h3>
-          <p><b>Что сделали:</b> подключили AI‑Администратора и AI‑Менеджера по продажам для обработки входящих запросов.</p>
-          <p><b>Результат:</b> скорость ответа с 20 минут до 30 секунд, конверсия +40%, экономия ≈ 3 200 BYN/мес.</p>
-        </article>
-        <article class="case">
-          <h3>Кейс 2. Оптимизация маркетинга</h3>
-          <p><b>Что сделали:</b> внедрили AI‑SMM и AI‑Копирайтера.</p>
-          <p><b>Результат:</b> за 2 недели — 60 постов и 20 объявлений, вовлечённость +55%.</p>
-        </article>
-        <article class="case">
-          <h3>Кейс 3. Финансы и аналитика</h3>
-          <p><b>Что сделали:</b> AI‑Финансист и AI‑Аналитик для еженедельной отчётности.</p>
-          <p><b>Результат:</b> отчёты — с 6 часов до 15 минут, экономия ≈ 4 000 BYN/мес.</p>
-        </article>
-      </div>
-      <div style="margin-top:12px"><a class="btn btn-primary" href="#catalog">Хочу так же</a></div>
-    </div>
-  </section>
-
-  <section class="section section-base faq" id="faq">
-    <div class="container">
-      <h2>FAQ</h2>
-      <div class="accent-line"></div>
-      <details><summary>Могут ли AI‑сотрудники полностью заменить реального человека?</summary><p>AI закрывает рутинные задачи и работает 24/7. Для стратегических решений человек остаётся важным.</p></details>
-      <details><summary>Как быстро AI‑сотрудник начнёт работать?</summary><p>В день подключения — выберите сотрудника, и он сразу готов к задачам.</p></details>
-      <details><summary>Можно ли обучить под специфику моего бизнеса?</summary><p>Да, обучаем AI вашим материалам: скриптам, инструкциям, базе знаний.</p></details>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <div class="container grid">
       <div>
-        <h3>Контакты</h3>
-        <p>+375 (29) 811-811-9<br>info@aiemployee.by<br>г. Минск, Республика Беларусь</p>
+        <h1>AiEmployee — платформа для найма AI‑сотрудников</h1>
+        <p>Снижайте расходы до 90% и ускоряйте бизнес в 10 раз с помощью виртуальных сотрудников.</p>
+        <div class="cta">
+          <a class="btn btn-hero" href="#catalog">Познакомиться с AI‑командой</a>
+          <a class="btn secondary" href="#how">Как это работает</a>
+        </div>
       </div>
-      <div>
-        <h3>Соцсети</h3>
-        <p><a href="https://t.me/aiemployee_by" target="_blank" rel="noopener">Telegram</a></p>
-      </div>
-      <div>
-        <h3>Юридическая информация</h3>
-        <p>© 2025 AiEmployee · <a href="#">Политика конфиденциальности</a></p>
+      <div class="hero-art" aria-hidden="true">
+        <picture>
+          <source srcset="assets/img/hero-collage-1600x1000.webp" type="image/webp">
+          <img src="assets/img/hero-collage-1600x1000.png" alt="Минималистичный коллаж карточек AI‑сотрудников">
+        </picture>
       </div>
     </div>
-  </footer>
+  </section>
 
-  <button class="float-cart" id="floatOpen" aria-label="Ваша команда">
-    <span>Ваша команда</span>
-    <span class="count" id="floatCount">0</span>
-  </button>
-
-  <div class="aside">
-    <div class="backdrop" id="backdrop"></div>
-    <aside class="panel">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <h3 id="panelTitle">Ваша команда (0)</h3>
-        <button class="btn ghost" id="closeAside">Закрыть</button>
-      </div>
-      <div class="list" id="selList"></div>
-      <form class="form" id="leadForm">
-        <label>Имя и должность</label>
-        <input name="name" placeholder="Иван Петров, основатель">
-        <label>Контактные данные</label>
-        <input name="contact" placeholder="+375..., email или Telegram">
-        <label>Комментарий</label>
-        <textarea name="comment" placeholder="Коротко о задачах, сроках, интеграциях"></textarea>
-        <p class="small">Если токен Telegram не настроен — текст заявки скопируется в буфер обмена.</p>
-        <button class="btn btn-primary" id="sendBtn" type="submit">Отправить заявку</button>
-      </form>
-    </aside>
-  </div>
-
-  <!-- Runtime config + app (поддержка секрета из CI). Если не используете — оставьте config.js пустым. -->
-  <script src="assets/js/config.js?v=build-20250818T210929Z"></script>
-  <script src="assets/js/app.js?v=build-20250818T210929Z"></script>
+  <!-- The rest of the page should follow your latest index (how/advantages/catalog/etc.) -->
 </body>
 </html>
