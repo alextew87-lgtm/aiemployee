@@ -11,6 +11,12 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aiemployee.by/">
   <link rel="stylesheet" href="assets/css/styles.css?v=build-20250818T195735Z">
+  <link rel="stylesheet" href="assets/css/hero-patch.css?v=1">
+  <link rel="stylesheet" href="assets/css/hero-image-scale.css?v=2">
+  <link rel="preload" as="image"
+        href="assets/img/hero-laptop-1200.webp"
+        imagesrcset="assets/img/hero-laptop-800.webp 800w, assets/img/hero-laptop-1200.webp 1200w, assets/img/hero-laptop-1600.webp 1600w"
+        imagesizes="(max-width: 900px) 92vw, 84vw">
 </head>
 <body>
   <!-- build-20250818T195735Z -->
@@ -28,22 +34,32 @@
   </header>
 
   <section class="hero" id="home">
-    <div class="container">
-      <h1>AiEmployee — платформа для найма AI‑сотрудников</h1>
+  <div class="container hero-grid">
+    <div class="hero-copy">
+<h1>AiEmployee — платформа для найма AI‑сотрудников</h1>
       <p>Снижайте расходы до 90% и ускоряйте бизнес в 10 раз с помощью виртуальных сотрудников.</p>
       <div class="cta">
         <a class="btn" href="#catalog">Познакомиться с AI‑командой</a>
         <a class="btn secondary" href="#how">Как это работает</a>
       </div>
     </div>
-  </section>
+    <figure class="hero-art laptop" aria-hidden="true">
+      <picture>
+        <source type="image/webp"
+                srcset="assets/img/hero-laptop-800.webp 800w, assets/img/hero-laptop-1200.webp 1200w, assets/img/hero-laptop-1600.webp 1600w"
+                sizes="(max-width: 900px) 92vw, 84vw">
+        <img src="assets/img/hero-laptop-1200.webp" alt="Экран с карточками AI‑сотрудников на ноутбуке" loading="eager" decoding="async" fetchpriority="high" width="1200">
+      </picture>
+    </figure>
+  </div>
+</section>
 
   <section class="section" id="how">
     <div class="container">
       <h2>Как это работает</h2>
-      <!-- how-icons patch start -->
+      
+<!-- how-icons patch start -->
 <style>
-  /* Scoped styles for the "Как это работает" icons */
   #how .how-icons{display:grid;grid-template-columns:repeat(3,minmax(220px,1fr));gap:20px;align-items:stretch;margin-top:16px}
   #how .how-icons .item{text-align:center;padding:20px 16px;border:1px solid rgba(14,19,32,.08);border-radius:16px;background:#fff;box-shadow:0 8px 28px rgba(14,19,32,.06)}
   #how .how-icons img{width:120px;height:auto;display:block;margin:0 auto 12px}
@@ -69,6 +85,7 @@
   </div>
 </div>
 <!-- how-icons patch end -->
+
 
       <h2 style="margin-top:22px">Преимущества</h2>
       <div class="bullets">

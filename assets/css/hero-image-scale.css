@@ -1,22 +1,4 @@
-
-/* === HERO image-only scale (keeps layout) — with right shift === */
-:root{
-  --hero-art-shift-x: 84px; /* move image to the right; tweak 28–44px if needed */
-}
-
-.hero .hero-art.laptop{
-  position: relative;
-  overflow: visible;
-  transform-origin: right center;
-  transform: translate(var(--hero-art-shift-x), -6px) scale(1.5); /* +50% size */
-}
-
-.hero .hero-art.laptop::before{
-  transform-origin: right center;
-  transform: translateX(var(--hero-art-shift-x)) scale(1.5);
-}
-
-@media (max-width: 900px){
-  .hero .hero-art.laptop{transform:none}
-  .hero .hero-art.laptop::before{transform:none}
-}
+:root{--hero-art-shift-x:36px}
+.hero .hero-art.laptop{transform-origin:right center;transform:translate(var(--hero-art-shift-x), -6px) scale(1.5)}
+.hero .hero-art.laptop::before{transform-origin:right center;transform:translateX(var(--hero-art-shift-x)) scale(1.5)}
+@media (max-width:900px){.hero .hero-art.laptop,.hero .hero-art.laptop::before{transform:none}}

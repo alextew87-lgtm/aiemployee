@@ -1,5 +1,4 @@
-
-/* === HERO patch (grid + laptop image) === */
+/* === HERO base grid === */
 .hero .hero-grid{display:grid;grid-template-columns:minmax(320px,560px) 1fr;align-items:center;gap:clamp(16px,3vw,40px)}
 .hero .hero-copy .cta{display:flex;gap:12px;flex-wrap:wrap}
 .hero .hero-art.laptop{justify-self:end;max-width:min(56vw,940px);position:relative;align-self:start;transform:translateY(-6px)}
