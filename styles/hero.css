@@ -1,28 +1,24 @@
-/* === Hero collage (aiemployee) — v2 === */
-.hero .hero-grid{
-  display:grid;
-  grid-template-columns:minmax(280px,560px) 1fr;
-  align-items:center;
-  gap:clamp(16px,3vw,40px);
-}
-.hero .hero-copy .cta{display:flex;gap:12px;flex-wrap:wrap}
-.hero .hero-art{
+
+/* === Hero — laptop image variant === */
+.hero .hero-art.laptop{
   justify-self:end;
-  max-width:min(52vw, 820px);
+  max-width:min(56vw, 940px);
+  position:relative;
   align-self:start;
   transform:translateY(-6px);
 }
-.hero .hero-art img{
-  width:100%;height:auto;display:block;border-radius:16px;
-  box-shadow:0 24px 80px rgba(17,18,20,.12);
-  outline:1px solid rgba(0,0,0,.04);
+.hero .hero-art.laptop::before{
+  content:"";
+  position:absolute;
+  right:6%;
+  bottom:-18px;
+  width:68%;
+  height:24px;
+  filter:blur(10px);
+  background:radial-gradient(closest-side, rgba(14,19,32,.18), transparent 70%);
+  pointer-events:none;
 }
+.hero .hero-art.laptop img{display:block;width:100%;height:auto}
 @media (max-width:900px){
-  .hero .hero-grid{grid-template-columns:1fr}
-  .hero .hero-art{justify-self:center;max-width:min(92vw,720px);transform:none}
-  .hero .hero-copy .cta .secondary{opacity:.85}
+  .hero .hero-art.laptop{justify-self:center;max-width:min(96vw,760px);transform:none}
 }
-@media (max-width:420px){
-  .hero .hero-copy .cta a{padding:10px 14px;font-size:14px}
-}
-
