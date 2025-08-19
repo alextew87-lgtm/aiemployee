@@ -27,15 +27,23 @@
     </div>
   </header>
 
-  <section class="hero" id="home">
-    <div class="container">
-      <h1>AiEmployee — платформа для найма AI‑сотрудников</h1>
-      <p>Снижайте расходы до 90% и ускоряйте бизнес в 10 раз с помощью виртуальных сотрудников.</p>
-      <div class="cta">
-        <a class="btn" href="#catalog">Познакомиться с AI‑командой</a>
-        <a class="btn secondary" href="#how">Как это работает</a>
-      </div>
-    </div>
+  <div class="hero-art" aria-hidden="true">
+  <picture>
+    <source
+      type="image/webp"
+      srcset="
+        assets/img/hero-collage-800.webp   800w,
+        assets/img/hero-collage-1200.webp 1200w,
+        assets/img/hero-collage-1600.webp 1600w"
+      sizes="(max-width: 960px) 100vw, 640px">
+    <img
+      src="assets/img/hero-collage-1600.png"
+      width="1600" height="1000"
+      alt="Коллаж карточек AI-сотрудников: Администратор, SMM-менеджер, Юрист, Дизайнер, Консультант, Копирайтер"
+      loading="eager" decoding="async">
+  </picture>
+</div>
+
   </section>
 
   <section class="section" id="how">
