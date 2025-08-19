@@ -11,6 +11,8 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aiemployee.by/">
   <link rel="stylesheet" href="assets/css/styles.css?v=build-20250818T195735Z">
+
+  <link rel="stylesheet" href="styles/hero.css">
 </head>
 <body>
   <!-- build-20250818T195735Z -->
@@ -27,16 +29,29 @@
     </div>
   </header>
 
-  <section class="hero" id="home">
-    <div class="container">
-      <h1>AiEmployee — платформа для найма AI‑сотрудников</h1>
+  
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <h1>AiEmployee — платформа для найма AI-сотрудников</h1>
       <p>Снижайте расходы до 90% и ускоряйте бизнес в 10 раз с помощью виртуальных сотрудников.</p>
       <div class="cta">
-        <a class="btn" href="#catalog">Познакомиться с AI‑командой</a>
+        <a class="btn" href="#catalog">Познакомиться с AI-командой</a>
         <a class="btn secondary" href="#how">Как это работает</a>
       </div>
     </div>
-  </section>
+    <figure class="hero-art" aria-hidden="true">
+      <picture>
+        <source type="image/webp"
+                srcset="public/hero/hero-collage-800.webp 800w, public/hero/hero-collage-1200.webp 1200w, public/hero/hero-collage-1600.webp 1600w"
+                sizes="(max-width: 900px) 92vw, 45vw">
+        <img src="public/hero/hero-collage-1200.webp" alt="Коллаж карточек AI-сотрудников (композиция справа)"
+             width="1200" height="750" loading="eager" decoding="async" fetchpriority="high">
+      </picture>
+    </figure>
+  </div>
+</section>
+
 
   <section class="section" id="how">
     <div class="container">

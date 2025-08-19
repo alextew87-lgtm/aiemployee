@@ -1,0 +1,9 @@
+/* === Hero collage (aiemployee) === */
+.hero .hero-grid{display:grid;grid-template-columns:minmax(280px,560px) 1fr;align-items:center;gap:clamp(16px,3vw,40px)}
+.hero .hero-copy .cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero .hero-art{justify-self:end;max-width:min(45vw,720px)}
+.hero .hero-art img{width:100%;height:auto;display:block;border-radius:16px;box-shadow:0 8px 32px rgba(14,15,18,.18)}
+@media (max-width:900px){
+  .hero .hero-grid{grid-template-columns:1fr}
+  .hero .hero-art{justify-self:center;max-width:min(92vw,720px)}
+}
