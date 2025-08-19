@@ -13,6 +13,12 @@
   <link rel="stylesheet" href="assets/css/styles.css?v=build-20250818T195735Z">
 
   <link rel="stylesheet" href="styles/hero.css">
+  <link rel="preload" as="image"
+      href="public/hero/hero-collage-1200.webp"
+      imagesrcset="public/hero/hero-collage-800.webp 800w,
+                   public/hero/hero-collage-1200.webp 1200w,
+                   public/hero/hero-collage-1600.webp 1600w"
+      imagesizes="(max-width: 900px) 92vw, 52vw">
 </head>
 <body>
   <!-- build-20250818T195735Z -->
@@ -44,7 +50,7 @@
       <picture>
         <source type="image/webp"
                 srcset="public/hero/hero-collage-800.webp 800w, public/hero/hero-collage-1200.webp 1200w, public/hero/hero-collage-1600.webp 1600w"
-                sizes="(max-width: 900px) 92vw, 45vw">
+                sizes="(max-width: 900px) 92vw, 52vw">
         <img src="public/hero/hero-collage-1200.webp" alt="Коллаж карточек AI-сотрудников (композиция справа)"
              width="1200" height="750" loading="eager" decoding="async" fetchpriority="high">
       </picture>
