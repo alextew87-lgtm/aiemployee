@@ -1,7 +1,7 @@
 
 /* === HERO image-only scale (keeps layout) — with right shift === */
 :root{
-  --hero-art-shift-x: 36px; /* move image to the right; tweak 28–44px if needed */
+  --hero-art-shift-x: 44px; /* move image to the right; tweak 28–44px if needed */
 }
 
 .hero .hero-art.laptop{
