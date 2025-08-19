@@ -1,16 +1,22 @@
 
-/* === HERO image-only scale (keeps layout, scales art) === */
+/* === HERO image-only scale (keeps layout) — with right shift === */
+:root{
+  --hero-art-shift-x: 36px; /* move image to the right; tweak 28–44px if needed */
+}
+
 .hero .hero-art.laptop{
   position: relative;
   overflow: visible;
   transform-origin: right center;
-  transform: translateY(-6px) scale(1.5); /* +50% only image */
+  transform: translate(var(--hero-art-shift-x), -6px) scale(1.5); /* +50% size */
 }
+
 .hero .hero-art.laptop::before{
   transform-origin: right center;
-  transform: scale(1.5);
+  transform: translateX(var(--hero-art-shift-x)) scale(1.5);
 }
+
 @media (max-width: 900px){
-  .hero .hero-art.laptop{transform: none;}
-  .hero .hero-art.laptop::before{transform:none;}
+  .hero .hero-art.laptop{transform:none}
+  .hero .hero-art.laptop::before{transform:none}
 }
