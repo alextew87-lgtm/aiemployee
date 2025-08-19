@@ -1,0 +1,16 @@
+
+/* === HERO image-only scale (keeps layout, scales art) === */
+.hero .hero-art.laptop{
+  position: relative;
+  overflow: visible;
+  transform-origin: right center;
+  transform: translateY(-6px) scale(1.5); /* +50% only image */
+}
+.hero .hero-art.laptop::before{
+  transform-origin: right center;
+  transform: scale(1.5);
+}
+@media (max-width: 900px){
+  .hero .hero-art.laptop{transform: none;}
+  .hero .hero-art.laptop::before{transform:none;}
+}
