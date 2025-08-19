@@ -1,0 +1,21 @@
+
+/* === HERO size override (50% larger) === */
+/* Make the hero container wider so the right column can grow */
+.hero .container{
+  max-width: min(96vw, 1360px) !important; /* was ~1120–1200px */
+}
+
+/* Make the right column wider than before */
+.hero .hero-grid{
+  grid-template-columns: minmax(380px, 640px) minmax(720px, 1fr) !important; /* was: minmax(320px,560px) 1fr */
+  align-items: center;
+}
+
+/* Keep image filling its track */
+.hero .hero-art.laptop{justify-self:end; align-self:start; transform:translateY(-4px)}
+.hero .hero-art.laptop img{width:100%; height:auto; display:block}
+
+@media (max-width: 900px){
+  .hero .container{max-width: 100% !important}
+  .hero .hero-grid{grid-template-columns:1fr !important}
+}
