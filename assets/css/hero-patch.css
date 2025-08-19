@@ -2,7 +2,7 @@
 /* === HERO patch (grid + laptop image) === */
 .hero .hero-grid{display:grid;grid-template-columns:minmax(320px,560px) 1fr;align-items:center;gap:clamp(16px,3vw,40px)}
 .hero .hero-copy .cta{display:flex;gap:12px;flex-wrap:wrap}
-.hero .hero-art.laptop{justify-self:end;max-width:min(56vw,940px);position:relative;align-self:start;transform:translateY(-6px)}
+.hero .hero-art.laptop{justify-self:end;max-width:min(84vw,1200px);position:relative;align-self:start;transform:translateY(-6px)}
 .hero .hero-art.laptop::before{content:"";position:absolute;right:6%;bottom:-18px;width:68%;height:24px;filter:blur(10px);background:radial-gradient(closest-side, rgba(14,19,32,.18), transparent 70%);pointer-events:none}
 .hero .hero-art.laptop img{display:block;width:100%;height:auto}
 @media (max-width:900px){.hero .hero-grid{grid-template-columns:1fr}.hero .hero-art.laptop{justify-self:center;max-width:min(96vw,760px);transform:none}}
