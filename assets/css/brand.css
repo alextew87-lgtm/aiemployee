@@ -1,6 +1,17 @@
 
-/* === Header brand (bigger logo) === */
+/* === Header brand (AiEmployee) ===
+   Управление размером и положением логотипа — изменяйте только переменные ниже. */
+:root{
+  --logo-h: 48px;        /* высота логотипа (десктоп). Поставьте, например, 56px или 64px */
+  --logo-h-mobile: 36px; /* высота на мобильных */
+  --logo-shift-x: 0px;   /* горизонтальный сдвиг (влево/вправо), если нужно выровнять по линии контейнера */
+  --logo-shift-y: 0px;   /* вертикальный сдвиг (вверх/вниз) тонкая подстройка по baseline */
+}
+
 .site .container.row{display:flex;align-items:center;justify-content:space-between}
-.site .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
-.site .brand img{height:40px;width:auto;display:block}      /* bigger on mobile */
-@media (min-width:1200px){.site .brand img{height:56px}}    /* much bigger on desktop */
+.site .brand{display:flex;align-items:center;gap:10px;text-decoration:none;
+             transform: translate(var(--logo-shift-x), var(--logo-shift-y));}
+.site .brand img{height:var(--logo-h); width:auto; display:block}
+@media (max-width: 900px){
+  .site .brand img{height:var(--logo-h-mobile)}
+}
