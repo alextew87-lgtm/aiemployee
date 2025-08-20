@@ -1,0 +1,6 @@
+/* Brand logo in header */
+.site .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.site .brand img{height:28px;width:auto;display:block}
+@media (min-width:1200px){.site .brand img{height:32px}}
+/* Keep header layout intact */
+.site .container.row{display:flex;align-items:center;justify-content:space-between}
