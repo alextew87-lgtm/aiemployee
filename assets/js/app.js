@@ -53,7 +53,8 @@ function composeMessage(){
     comment: form.comment.value.trim(),
     ts: new Date().toISOString()
   }
-let __BITRIX_SENT_FLAG = false;
+// ---- Bitrix lead integration (robust) ----
+let __BITRIX_LAST_KEY = '';
 function parseContact(raw){
   const s = String(raw||'').trim();
   const isEmail = /\S+@\S+\.\S+/.test(s);
@@ -84,7 +85,7 @@ function buildBitrixFields(payload){
   if (c.tg)    fields.IM    = [{ VALUE: 'telegram:'+c.tg, VALUE_TYPE: 'WORK' }];
   return fields;
 }
-// Cross-origin POST via hidden form + iframe (bypasses CORS reliably)
+// Hidden form + iframe (bypasses CORS reliably)
 function postViaForm(url, fields){
   try{
     let iframe = document.getElementById('bitrixPostTarget');
@@ -127,13 +128,31 @@ function postViaForm(url, fields){
   }catch(e){ console.warn('postViaForm error', e); return false; }
 }
 function sendLeadToBitrix(){
-  if(__BITRIX_SENT_FLAG) return;
-  __BITRIX_SENT_FLAG = true;
   if(!BITRIX_WEBHOOK_URL) return;
   const {payload} = composeMessage();
+  const key = JSON.stringify(payload);
+  if(__BITRIX_LAST_KEY === key) return; // avoid double send on click+submit
+  __BITRIX_LAST_KEY = key;
   const fields = buildBitrixFields(payload);
+  // Try hidden form
   postViaForm(BITRIX_WEBHOOK_URL, fields);
 }
+// Hook robustly: capture submit and click before other handlers, but do not block them
+(function(){
+  function hook(){
+    const form = document.getElementById('leadForm');
+    const btn = document.getElementById('sendBtn');
+    if(form){
+      form.addEventListener('submit', function(){ try{ sendLeadToBitrix(); }catch(_){ } }, {capture:true});
+    }
+    if(btn){
+      btn.addEventListener('click', function(){ try{ sendLeadToBitrix(); }catch(_){ } }, {capture:true});
+    }
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', hook);
+  else hook();
+})();
+// ---- end Bitrix ----
 ;
   const pretty = `Заявка с сайта aiemployee.by
 Команда: ${payload.team.join(', ') || '- (не выбраны)'}
@@ -173,7 +192,6 @@ window.addEventListener('DOMContentLoaded', ()=>{
   $('#leadForm').addEventListener('submit', async (e)=>{
     e.preventDefault();
     $('#sendBtn').disabled = true;
-    try{ sendLeadToBitrix(); }catch(_){ }
     try{ await sendToTelegram(); alert('Заявка отправлена!'); openAside(false); e.target.reset(); }
     catch{ alert('Не удалось отправить. Попробуйте позже.'); }
     finally{ $('#sendBtn').disabled = false; }
