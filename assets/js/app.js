@@ -3,8 +3,10 @@ const STATE = {
   selection: new Set(JSON.parse(localStorage.getItem('aiemp.selection')||'[]')),
   TELEGRAM_BOT_TOKEN: '8097478338:AAGb-aDrc7nSTgG5P_Oolk_KIHWMUCQlNtg',
   TELEGRAM_CHAT_ID: '-4885519582'
+  , BITRIX_WEBHOOK_URL: ''
 };
 const $ = s=>document.querySelector(s);
+const BITRIX_WEBHOOK_URL = 'https://aiemployee.bitrix24.by/rest/1/t7fjlci82tji0e94/crm.lead.add.json';
 const $$ = s=>document.querySelectorAll(s);
 
 function saveSelection(){
@@ -51,7 +53,60 @@ function composeMessage(){
     contact: form.contact.value.trim(),
     comment: form.comment.value.trim(),
     ts: new Date().toISOString()
+  }
+function parseContact(raw){
+  const s = String(raw||'').trim();
+  const isEmail = /\S+@\S+\.\S+/.test(s);
+  const onlyDigits = s.replace(/[^\d+]/g,'');
+  const isPhone = /^\+?\d{7,15}$/.test(onlyDigits);
+  const tgMatch = s.match(/@([a-z0-9_]{3,})/i);
+  return { email: isEmail ? s : '', phone: isPhone ? onlyDigits : '', tg: tgMatch ? tgMatch[1] : '' };
+}
+function buildBitrixFields(payload){
+  const parts = String(payload.name||'').trim().split(/\s+/);
+  const name = parts.shift() || '';
+  const last = parts.join(' ');
+  const c = parseContact(payload.contact||'');
+  const fields = {
+    TITLE: 'Заявка с сайта AiEmployee',
+    NAME: name,
+    LAST_NAME: last,
+    SOURCE_ID: 'WEB',
+    COMMENTS:
+`Команда: ${payload.team && payload.team.length ? payload.team.join(', ') : '- (не выбраны)'}
+Контакты: ${payload.contact||''}
+Комментарий: ${payload.comment||''}
+Страница: ${location.href}
+Время: ${payload.ts}`
   };
+  if (c.email) fields.EMAIL = [{ VALUE: c.email, VALUE_TYPE: 'WORK' }];
+  if (c.phone) fields.PHONE = [{ VALUE: c.phone, VALUE_TYPE: 'WORK' }];
+  if (c.tg)    fields.IM    = [{ VALUE: 'telegram:'+c.tg, VALUE_TYPE: 'WORK' }];
+  return fields;
+}
+async function sendLeadToBitrix(){
+  try{
+    if(!BITRIX_WEBHOOK_URL) return;
+    const {payload} = composeMessage();
+    const fields = buildBitrixFields(payload);
+    const form = new URLSearchParams();
+    for (const [k,v] of Object.entries(fields)){
+      if (Array.isArray(v)){
+        v.forEach((item,i)=>{ for(const [ik,iv] of Object.entries(item)) form.append(`fields[${k}][${i}][${ik}]`, iv); });
+      } else {
+        form.append(`fields[${k}]`, v);
+      }
+    }
+    form.append('params[REGISTER_SONET_EVENT]', 'Y');
+    await fetch(BITRIX_WEBHOOK_URL, {
+      method:'POST',
+      mode:'no-cors',
+      headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},
+      body: form
+    });
+  }catch(e){ console.warn('Bitrix lead send error (ignored):', e); }
+}
+;
   const pretty = `Заявка с сайта aiemployee.by
 Команда: ${payload.team.join(', ') || '- (не выбраны)'}
 Имя/должность: ${payload.name}
@@ -90,7 +145,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
   $('#leadForm').addEventListener('submit', async (e)=>{
     e.preventDefault();
     $('#sendBtn').disabled = true;
-    try{ await sendToTelegram(); alert('Заявка отправлена!'); openAside(false); e.target.reset(); }
+    try{ try{ sendLeadToBitrix(); }catch(_){} await sendToTelegram(); alert('Заявка отправлена!'); openAside(false); e.target.reset(); }
     catch{ alert('Не удалось отправить. Попробуйте позже.'); }
     finally{ $('#sendBtn').disabled = false; }
   });
