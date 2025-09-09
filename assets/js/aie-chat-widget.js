@@ -1,14 +1,7 @@
 
-// AiEmployee Site Chat → n8n webhook sender (light theme, non-breaking)
-// Sends POST x-www-form-urlencoded to: https://sihieparaque.beget.app/webhook/sitechat-in
-// Uses fetch with mode:'no-cors' to avoid CORS preflight. Falls back to navigator.sendBeacon.
-// Does not depend on global STATE; does not modify existing site code.
-(function(){
-  if(window.__AIE_CHAT_WIDGET__) return; window.__AIE_CHAT_WIDGET__=true;
-  var WEBHOOK = "https://sihieparaque.beget.app/webhook/sitechat-in";
-
+(function(){ if(window.__AIE_CHAT_WIDGET__) return; window.__AIE_CHAT_WIDGET__=true;
+  var WEBHOOK="https://sihieparaque.beget.app/webhook/sitechat-in";
   function h(t,a,c){var e=document.createElement(t);a=a||{};for(var k in a){if(k==='class')e.className=a[k];else if(k==='style')e.setAttribute('style',a[k]);else if(k.startsWith('on')&&typeof a[k]==='function')e.addEventListener(k.slice(2),a[k]);else e.setAttribute(k,a[k]);};if(!Array.isArray(c))c=[c];(c||[]).filter(Boolean).forEach(function(n){e.appendChild(typeof n==='string'?document.createTextNode(n):n);});return e;}
-
   var css = [
     '.aie-chat-btn{position:fixed;right:16px;bottom:16px;z-index:9999;display:flex;align-items:center;gap:8px;padding:12px 14px;border-radius:999px;border:1px solid rgba(0,0,0,.08);background:#fff;box-shadow:0 6px 20px rgba(0,0,0,.12);font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;cursor:pointer;user-select:none}',
     '.aie-chat-btn svg{width:18px;height:18px;opacity:.9}',
@@ -31,7 +24,6 @@
     '@media (max-width:420px){.aie-chat-drawer{height:60vh}}'
   ].join('\n');
   var style = h('style',{},css); document.head.appendChild(style);
-
   var btn = h('button',{class:'aie-chat-btn',title:'Чат с AiEmployee'},[]);
   btn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5.5A3.5 3.5 0 0 1 5.5 2h13A3.5 3.5 0 0 1 22 5.5v7A3.5 3.5 0 0 1 18.5 16H9l-4.8 4.1A1 1 0 0 1 2 19.3V5.5Z"/></svg><span>Чат с AiEmployee</span>';
   var drawer = h('div',{class:'aie-chat-drawer',role:'dialog','aria-label':'Чат с AiEmployee'});
@@ -42,69 +34,17 @@
   var nameRow = h('div',{class:'aie-row'},[ h('input',{type:'text',placeholder:'Имя или компания',id:'aieName',autocomplete:'name'}), h('input',{type:'text',placeholder:'Телефон или @Telegram',id:'aieContact',autocomplete:'tel'}) ]);
   var ta = h('textarea',{placeholder:'Напишите вопрос…',id:'aieText',maxlength:'2000'});
   var send = h('button',{class:'aie-chat-send',id:'aieSend'},'Отправить'); send.addEventListener('click', onSend);
-
-  inputWrap.appendChild(h('div',{style:'width:100%'},[nameRow, ta])); inputWrap.appendChild(send);
-  body.appendChild(log); body.appendChild(inputWrap);
-  drawer.appendChild(header); drawer.appendChild(body);
-  document.body.appendChild(btn); document.body.appendChild(drawer);
-  btn.addEventListener('click', function(){toggle(true)});
-
   function toggle(open){ drawer.style.display = open?'block':'none'; }
   function addMsg(text, who){ var m=h('div',{class:'aie-msg '+(who||'bot')},text); log.appendChild(m); log.scrollTop=log.scrollHeight; }
   function safe(s){ return String(s||'-').slice(0,750); }
-
-  function buildPayload(name, contact, msg){
-    var data = new URLSearchParams();
-    data.set('source','aiemployee.by/chat');
-    data.set('name', safe(name));
-    data.set('contact', safe(contact));
-    data.set('message', safe(msg));
-    data.set('page', location.href);
-    data.set('ts', new Date().toISOString());
-    return data.toString();
-  }
-
-  async function postFormEncoded(bodyStr){
-    try{
-      await fetch(WEBHOOK, {
-        method:'POST',
-        mode:'no-cors',
-        headers:{ 'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8' },
-        body: bodyStr
-      });
-      return true; // with no-cors we can't read response; assume success
-    }catch(e){ return false; }
-  }
-
-  function beaconFallback(bodyStr){
-    if(navigator.sendBeacon){
-      try{ 
-        var blob = new Blob([bodyStr], { type: 'text/plain;charset=UTF-8' });
-        return navigator.sendBeacon(WEBHOOK, blob);
-      }catch(e){ return false; }
-    }
-    return false;
-  }
-
-  var sending=false;
-  async function onSend(){
-    if(sending) return;
-    var name = document.getElementById('aieName').value.trim();
-    var contact = document.getElementById('aieContact').value.trim();
-    var text = document.getElementById('aieText').value.trim();
-    if(!text){ ta.focus(); return; }
-    sending=true; send.disabled=true;
-    addMsg(text,'user'); document.getElementById('aieText').value='';
-
-    var body = buildPayload(name, contact, text);
-    var ok = await postFormEncoded(body);
-    if(!ok) ok = beaconFallback(body);
-
-    if(ok) addMsg('Приняли! Сообщение отправлено в систему. Мы скоро ответим.', 'bot');
-    else { 
-      try{ await navigator.clipboard.writeText(decodeURIComponent(body)); }catch(e){}
-      addMsg('Не удалось отправить автоматически. Сообщение скопировано в буфер — вставьте его в чат @aiemployee_by или отправьте через форму заявки.', 'bot');
-    }
-    sending=false; send.disabled=false;
-  }
+  function placeButtons(){ var hasFloat=document.getElementById('floatOpen'); if(hasFloat){ btn.style.bottom='96px'; drawer.style.bottom='156px'; } else { btn.style.bottom='16px'; drawer.style.bottom='76px'; } }
+  inputWrap.appendChild(h('div',{style:'width:100%'},[nameRow, ta])); inputWrap.appendChild(send);
+  body.appendChild(log); body.appendChild(inputWrap);
+  drawer.appendChild(header); drawer.appendChild(body);
+  document.body.appendChild(btn); document.body.appendChild(drawer); placeButtons(); window.addEventListener('resize', placeButtons);
+  btn.addEventListener('click', function(){toggle(true)});
+  function buildPayload(name, contact, msg){ var d=new URLSearchParams(); d.set('source','aiemployee.by/chat'); d.set('name',safe(name)); d.set('contact',safe(contact)); d.set('message',safe(msg)); d.set('page',location.href); d.set('ts',new Date().toISOString()); return d.toString(); }
+  async function postFormEncoded(bodyStr){ try{ await fetch(WEBHOOK,{ method:'POST', mode:'no-cors', headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}, body:bodyStr }); return true; }catch(e){ return false; } }
+  function beaconFallback(bodyStr){ if(navigator.sendBeacon){ try{ return navigator.sendBeacon(WEBHOOK,new Blob([bodyStr],{type:'text/plain;charset=UTF-8'})); }catch(e){ return false; } } return false; }
+  var sending=false; async function onSend(){ if(sending) return; var name=document.getElementById('aieName').value.trim(); var contact=document.getElementById('aieContact').value.trim(); var text=document.getElementById('aieText').value.trim(); if(!text){ ta.focus(); return; } sending=true; send.disabled=true; addMsg(text,'user'); document.getElementById('aieText').value=''; var body=buildPayload(name,contact,text); var ok=await postFormEncoded(body); if(!ok) ok=beaconFallback(body); if(ok) addMsg('Приняли! Сообщение отправлено в систему. Мы скоро ответим.','bot'); else { try{ await navigator.clipboard.writeText(decodeURIComponent(body)); }catch(e){} addMsg('Не удалось отправить автоматически. Сообщение скопировано в буфер — вставьте его в чат @aiemployee_by или отправьте через форму заявки.','bot'); } sending=false; send.disabled=false; }
 })();
