@@ -1,0 +1,12 @@
+
+:root{
+  --logo-h: 66px;        /* высота логотипа на десктопе */
+  --logo-h-mobile: 50px; /* высота логотипа на мобильных */
+  --logo-shift-x: 10px;   /* сдвиг по горизонтали */
+  --logo-shift-y: 0px;   /* сдвиг по вертикали */
+}
+.site .container.row{display:flex;align-items:center;justify-content:space-between}
+.site .brand{display:flex;align-items:center;gap:10px;text-decoration:none;
+             transform: translate(var(--logo-shift-x), var(--logo-shift-y));}
+.site .brand img{height:var(--logo-h); width:auto; display:block}
+@media (max-width:900px){ .site .brand img{height:var(--logo-h-mobile)} }

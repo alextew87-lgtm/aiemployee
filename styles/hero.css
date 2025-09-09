@@ -1,0 +1,24 @@
+
+/* === Hero — laptop image variant === */
+.hero .hero-art.laptop{
+  justify-self:end;
+  max-width:min(56vw, 940px);
+  position:relative;
+  align-self:start;
+  transform:translateY(-6px);
+}
+.hero .hero-art.laptop::before{
+  content:"";
+  position:absolute;
+  right:6%;
+  bottom:-18px;
+  width:68%;
+  height:24px;
+  filter:blur(10px);
+  background:radial-gradient(closest-side, rgba(14,19,32,.18), transparent 70%);
+  pointer-events:none;
+}
+.hero .hero-art.laptop img{display:block;width:100%;height:auto}
+@media (max-width:900px){
+  .hero .hero-art.laptop{justify-self:center;max-width:min(96vw,760px);transform:none}
+}

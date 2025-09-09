@@ -1,0 +1,6 @@
+
+/* === HERO image-only scale & shift === */
+:root{ --hero-art-shift-x: 86px; } /* user's saved offset */
+.hero .hero-art.laptop{ transform-origin:right center; transform: translate(var(--hero-art-shift-x), -6px) scale(1.5); }
+.hero .hero-art.laptop::before{ transform-origin:right center; transform: translateX(var(--hero-art-shift-x)) scale(1.5); }
+@media (max-width:900px){ .hero .hero-art.laptop{ transform:none } .hero .hero-art.laptop::before{ transform:none } }
