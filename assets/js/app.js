@@ -4,9 +4,6 @@ const STATE = {
   TELEGRAM_BOT_TOKEN: '8097478338:AAGb-aDrc7nSTgG5P_Oolk_KIHWMUCQlNtg',
   TELEGRAM_CHAT_ID: '-4885519582'
 };
-const STATE = {
-  BITRIX_WEBHOOK_URL: 'https://aiemployee.bitrix24.by/rest/1/t7fjlci82tji0e94/crm.lead.add.json'
-};
 const $ = s=>document.querySelector(s);
 const $$ = s=>document.querySelectorAll(s);
 
