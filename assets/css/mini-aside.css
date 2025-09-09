@@ -1,0 +1,18 @@
+/* Mini UI overrides for team selection & lead form */
+.float-cart{font-size:12px;padding:6px 8px;gap:6px;border-radius:12px}
+.float-cart .count{padding:2px 6px;font-size:11px}
+.aside .panel{width:220px;padding:9px}
+.aside h3{font-size:14px}
+.list{gap:6px;margin:6px 0 10px}
+.sel{gap:6px;padding:6px;border-radius:10px}
+.sel img{width:28px;height:28px}
+.sel .name{font-size:12px}
+.form label{margin:6px 0 4px;font-size:12px}
+.form input,.form textarea{padding:6px 8px;border-radius:10px;font-size:12px}
+.form textarea{min-height:70px}
+.small{font-size:10px}
+.btn{padding:8px 10px;font-size:12px;border-radius:10px}
+.btn.ghost{padding:6px 8px;font-size:12px}
+@media (max-width:480px){
+  .aside .panel{width:86vw}
+}
