@@ -30,10 +30,57 @@ function syncButtons(){
   });
 }
 function renderFloat(){ const c = $('#floatCount'); if(c) c.textContent = STATE.selection.size; }
+
 function renderAsideList(){
-  const box = $('#selList'); if(!box) return; box.innerHTML='';
-  [...STATE.selection].forEach(id=>{
+  const box = $('#selList');
+  if (!box) return;
+  box.innerHTML = '';
+
+  const ids = [...STATE.selection];
+  ids.forEach(id=>{
     const card = document.querySelector(`.card[data-id="${id}"]`);
+    if(!card) return;
+
+    const imgEl = card.querySelector('img');
+    const titleEl = card.querySelector('h3, .title, .name');
+
+    const row = document.createElement('div');
+    row.className = 'sel';
+    row.dataset.id = id;
+
+    if (imgEl){
+      const i = document.createElement('img');
+      i.src = imgEl.getAttribute('src');
+      i.alt = '';
+      row.appendChild(i);
+    }
+
+    const name = document.createElement('div');
+    name.className = 'name';
+    name.textContent = titleEl ? titleEl.textContent.trim() : id;
+    row.appendChild(name);
+
+    const rm = document.createElement('button');
+    rm.type = 'button';
+    rm.className = 'sel-remove';
+    rm.setAttribute('aria-label', 'Убрать из команды');
+    rm.title = 'Убрать из команды';
+    rm.textContent = '×';
+    rm.addEventListener('click', (e)=>{
+      e.preventDefault();
+      e.stopPropagation();
+      STATE.selection.delete(id);
+      saveSelection();
+    });
+    row.appendChild(rm);
+
+    box.appendChild(row);
+  });
+
+  const pt = $('#panelTitle');
+  if (pt) pt.textContent = `Ваша команда (${STATE.selection.size})`;
+}
+"]`);
     if(!card) return;
     const img = card.querySelector('img');
     const title = card.querySelector('h3, .title, .name');
