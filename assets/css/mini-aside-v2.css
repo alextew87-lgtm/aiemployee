@@ -1,0 +1,39 @@
+/* Mini UI overrides v2 — wider panel, bigger font, pushed below header */
+.float-cart{font-size:14px;padding:8px 10px;gap:8px;border-radius:14px}
+.float-cart .count{padding:4px 8px;font-size:12px}
+
+.aside .panel{
+  /* wider panel */
+  width: 360px;
+  /* push below fixed header */
+  top: 84px;
+  height: calc(100% - 84px - 16px);
+  /* keep existing padding (comes from base); mini override keeps it compact */
+}
+
+/* Headline */
+.aside h3{font-size:16px}
+
+/* Selected list compact but readable */
+.list{gap:8px;margin:8px 0 12px}
+.sel{gap:8px;padding:8px;border-radius:12px}
+.sel img{width:36px;height:36px}
+.sel .name{font-size:14px}
+
+/* Form readability */
+.form label{margin:8px 0 6px;font-size:14px}
+.form input,.form textarea{padding:10px 12px;border-radius:12px;font-size:14px}
+.form textarea{min-height:90px}
+.small{font-size:11px}
+
+/* Buttons */
+.btn{padding:10px 12px;font-size:14px;border-radius:12px}
+.btn.ghost{padding:8px 10px;font-size:13px}
+
+@media (max-width: 480px){
+  .aside .panel{
+    width: 92vw;
+    top: 72px;
+    height: calc(100% - 72px - 12px);
+  }
+}
