@@ -6,7 +6,6 @@ const STATE = {
 };
 const $ = s=>document.querySelector(s);
 const $$ = s=>document.querySelectorAll(s);
-const BITRIX_WEBHOOK_URL = 'https://aiemployee.bitrix24.by/rest/1/t7fjlci82tji0e94/crm.lead.add.json';
 
 function saveSelection(){
   localStorage.setItem('aiemp.selection', JSON.stringify([...STATE.selection]));
@@ -52,108 +51,7 @@ function composeMessage(){
     contact: form.contact.value.trim(),
     comment: form.comment.value.trim(),
     ts: new Date().toISOString()
-  }
-// ---- Bitrix lead integration (robust) ----
-let __BITRIX_LAST_KEY = '';
-function parseContact(raw){
-  const s = String(raw||'').trim();
-  const isEmail = /\S+@\S+\.\S+/.test(s);
-  const onlyDigits = s.replace(/[^\d+]/g,'');
-  const isPhone = /^\+?\d{7,15}$/.test(onlyDigits);
-  const tgMatch = s.match(/@([a-z0-9_]{3,})/i);
-  return { email: isEmail ? s : '', phone: isPhone ? onlyDigits : '', tg: tgMatch ? tgMatch[1] : '' };
-}
-function buildBitrixFields(payload){
-  const parts = String(payload.name||'').trim().split(/\s+/);
-  const name = parts.shift() || '';
-  const last = parts.join(' ');
-  const c = parseContact(payload.contact||'');
-  const fields = {
-    TITLE: 'Заявка с сайта AiEmployee',
-    NAME: name,
-    LAST_NAME: last,
-    SOURCE_ID: 'WEB',
-    COMMENTS:
-`Команда: ${payload.team && payload.team.length ? payload.team.join(', ') : '- (не выбраны)'}
-Контакты: ${payload.contact||''}
-Комментарий: ${payload.comment||''}
-Страница: ${location.href}
-Время: ${payload.ts}`
   };
-  if (c.email) fields.EMAIL = [{ VALUE: c.email, VALUE_TYPE: 'WORK' }];
-  if (c.phone) fields.PHONE = [{ VALUE: c.phone, VALUE_TYPE: 'WORK' }];
-  if (c.tg)    fields.IM    = [{ VALUE: 'telegram:'+c.tg, VALUE_TYPE: 'WORK' }];
-  return fields;
-}
-// Hidden form + iframe (bypasses CORS reliably)
-function postViaForm(url, fields){
-  try{
-    let iframe = document.getElementById('bitrixPostTarget');
-    if(!iframe){
-      iframe = document.createElement('iframe');
-      iframe.style.display = 'none';
-      iframe.name = 'bitrixPostTarget';
-      iframe.id = 'bitrixPostTarget';
-      document.body.appendChild(iframe);
-    }
-    const form = document.createElement('form');
-    form.style.display = 'none';
-    form.method = 'POST';
-    form.action = url;
-    form.target = 'bitrixPostTarget';
-    form.acceptCharset = 'UTF-8';
-    const append = (name, value)=>{
-      const inp = document.createElement('input');
-      inp.type = 'hidden';
-      inp.name = name;
-      inp.value = value;
-      form.appendChild(inp);
-    };
-    for (const [k,v] of Object.entries(fields)){
-      if (Array.isArray(v)){
-        v.forEach((item,i)=>{
-          for(const [ik,iv] of Object.entries(item)){
-            append(`fields[${k}][${i}][${ik}]`, iv);
-          }
-        });
-      } else {
-        append(`fields[${k}]`, v);
-      }
-    }
-    append('params[REGISTER_SONET_EVENT]', 'Y');
-    document.body.appendChild(form);
-    form.submit();
-    setTimeout(()=>form.remove(), 1000);
-    return true;
-  }catch(e){ console.warn('postViaForm error', e); return false; }
-}
-function sendLeadToBitrix(){
-  if(!BITRIX_WEBHOOK_URL) return;
-  const {payload} = composeMessage();
-  const key = JSON.stringify(payload);
-  if(__BITRIX_LAST_KEY === key) return; // avoid double send on click+submit
-  __BITRIX_LAST_KEY = key;
-  const fields = buildBitrixFields(payload);
-  // Try hidden form
-  postViaForm(BITRIX_WEBHOOK_URL, fields);
-}
-// Hook robustly: capture submit and click before other handlers, but do not block them
-(function(){
-  function hook(){
-    const form = document.getElementById('leadForm');
-    const btn = document.getElementById('sendBtn');
-    if(form){
-      form.addEventListener('submit', function(){ try{ sendLeadToBitrix(); }catch(_){ } }, {capture:true});
-    }
-    if(btn){
-      btn.addEventListener('click', function(){ try{ sendLeadToBitrix(); }catch(_){ } }, {capture:true});
-    }
-  }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', hook);
-  else hook();
-})();
-// ---- end Bitrix ----
-;
   const pretty = `Заявка с сайта aiemployee.by
 Команда: ${payload.team.join(', ') || '- (не выбраны)'}
 Имя/должность: ${payload.name}
