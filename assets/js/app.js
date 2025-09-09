@@ -3,11 +3,10 @@ const STATE = {
   selection: new Set(JSON.parse(localStorage.getItem('aiemp.selection')||'[]')),
   TELEGRAM_BOT_TOKEN: '8097478338:AAGb-aDrc7nSTgG5P_Oolk_KIHWMUCQlNtg',
   TELEGRAM_CHAT_ID: '-4885519582'
-  , BITRIX_WEBHOOK_URL: ''
 };
 const $ = s=>document.querySelector(s);
-const BITRIX_WEBHOOK_URL = 'https://aiemployee.bitrix24.by/rest/1/t7fjlci82tji0e94/crm.lead.add.json';
 const $$ = s=>document.querySelectorAll(s);
+const BITRIX_WEBHOOK_URL = 'https://aiemployee.bitrix24.by/rest/1/t7fjlci82tji0e94/crm.lead.add.json';
 
 function saveSelection(){
   localStorage.setItem('aiemp.selection', JSON.stringify([...STATE.selection]));
@@ -84,27 +83,74 @@ function buildBitrixFields(payload){
   if (c.tg)    fields.IM    = [{ VALUE: 'telegram:'+c.tg, VALUE_TYPE: 'WORK' }];
   return fields;
 }
-async function sendLeadToBitrix(){
+// Cross-origin POST without CORS via hidden form + iframe
+function postViaForm(url, fields){
   try{
-    if(!BITRIX_WEBHOOK_URL) return;
-    const {payload} = composeMessage();
-    const fields = buildBitrixFields(payload);
-    const form = new URLSearchParams();
+    let iframe = document.getElementById('bitrixPostTarget');
+    if(!iframe){
+      iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      iframe.name = 'bitrixPostTarget';
+      iframe.id = 'bitrixPostTarget';
+      document.body.appendChild(iframe);
+    }
+    const form = document.createElement('form');
+    form.style.display = 'none';
+    form.method = 'POST';
+    form.action = url;
+    form.target = 'bitrixPostTarget';
+    const append = (name, value)=>{
+      const inp = document.createElement('input');
+      inp.type = 'hidden';
+      inp.name = name;
+      inp.value = value;
+      form.appendChild(inp);
+    };
+    // flatten fields into fields[KEY] and arrays for PHONE/EMAIL/IM
     for (const [k,v] of Object.entries(fields)){
       if (Array.isArray(v)){
-        v.forEach((item,i)=>{ for(const [ik,iv] of Object.entries(item)) form.append(`fields[${k}][${i}][${ik}]`, iv); });
+        v.forEach((item,i)=>{
+          for(const [ik,iv] of Object.entries(item)){
+            append(`fields[${k}][${i}][${ik}]`, iv);
+          }
+        });
       } else {
-        form.append(`fields[${k}]`, v);
+        append(`fields[${k}]`, v);
       }
     }
-    form.append('params[REGISTER_SONET_EVENT]', 'Y');
-    await fetch(BITRIX_WEBHOOK_URL, {
-      method:'POST',
-      mode:'no-cors',
-      headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},
-      body: form
-    });
-  }catch(e){ console.warn('Bitrix lead send error (ignored):', e); }
+    append('params[REGISTER_SONET_EVENT]', 'Y');
+    document.body.appendChild(form);
+    form.submit();
+    setTimeout(()=>form.remove(), 3000);
+    return true;
+  }catch(e){ console.warn('postViaForm error', e); return false; }
+}
+async function sendLeadToBitrix(){
+  if(!BITRIX_WEBHOOK_URL) return;
+  const {payload} = composeMessage();
+  const fields = buildBitrixFields(payload);
+  // 1) Try hidden form (most reliable)
+  const ok = postViaForm(BITRIX_WEBHOOK_URL, fields);
+  // 2) Also fire a GET beacon as duplicate-safe fallback with minimal fields
+  try{
+    const p = new URLSearchParams();
+    p.set('fields[TITLE]', fields.TITLE || 'Заявка с сайта AiEmployee');
+    if(fields.NAME)     p.set('fields[NAME]', fields.NAME);
+    if(fields.LAST_NAME)p.set('fields[LAST_NAME]', fields.LAST_NAME);
+    p.set('fields[SOURCE_ID]', fields.SOURCE_ID || 'WEB');
+    const cmt = String(fields.COMMENTS||'').slice(0,480);
+    p.set('fields[COMMENTS]', cmt);
+    if(Array.isArray(fields.PHONE) && fields.PHONE[0]?.VALUE){
+      p.set('fields[PHONE][0][VALUE]', fields.PHONE[0].VALUE);
+      p.set('fields[PHONE][0][VALUE_TYPE]', fields.PHONE[0].VALUE_TYPE||'WORK');
+    }
+    if(Array.isArray(fields.EMAIL) && fields.EMAIL[0]?.VALUE){
+      p.set('fields[EMAIL][0][VALUE]', fields.EMAIL[0].VALUE);
+      p.set('fields[EMAIL][0][VALUE_TYPE]', fields.EMAIL[0].VALUE_TYPE||'WORK');
+    }
+    const img = new Image();
+    img.src = BITRIX_WEBHOOK_URL + '?' + p.toString() + '&_ts=' + Date.now();
+  }catch(e){ console.warn('Bitrix GET fallback error', e); }
 }
 ;
   const pretty = `Заявка с сайта aiemployee.by
@@ -145,7 +191,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
   $('#leadForm').addEventListener('submit', async (e)=>{
     e.preventDefault();
     $('#sendBtn').disabled = true;
-    try{ try{ sendLeadToBitrix(); }catch(_){} await sendToTelegram(); alert('Заявка отправлена!'); openAside(false); e.target.reset(); }
+    try{ await sendToTelegram(); alert('Заявка отправлена!'); openAside(false); e.target.reset(); }
     catch{ alert('Не удалось отправить. Попробуйте позже.'); }
     finally{ $('#sendBtn').disabled = false; }
   });
