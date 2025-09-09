@@ -53,6 +53,7 @@ function composeMessage(){
     comment: form.comment.value.trim(),
     ts: new Date().toISOString()
   }
+let __BITRIX_SENT_FLAG = false;
 function parseContact(raw){
   const s = String(raw||'').trim();
   const isEmail = /\S+@\S+\.\S+/.test(s);
@@ -83,7 +84,7 @@ function buildBitrixFields(payload){
   if (c.tg)    fields.IM    = [{ VALUE: 'telegram:'+c.tg, VALUE_TYPE: 'WORK' }];
   return fields;
 }
-// Cross-origin POST with hidden form + iframe (bypasses CORS reliably)
+// Cross-origin POST via hidden form + iframe (bypasses CORS reliably)
 function postViaForm(url, fields){
   try{
     let iframe = document.getElementById('bitrixPostTarget');
@@ -126,6 +127,8 @@ function postViaForm(url, fields){
   }catch(e){ console.warn('postViaForm error', e); return false; }
 }
 function sendLeadToBitrix(){
+  if(__BITRIX_SENT_FLAG) return;
+  __BITRIX_SENT_FLAG = true;
   if(!BITRIX_WEBHOOK_URL) return;
   const {payload} = composeMessage();
   const fields = buildBitrixFields(payload);
@@ -156,8 +159,6 @@ async function sendToTelegram(){
   if(!res.ok) throw new Error('Telegram API error');
 }
 window.addEventListener('DOMContentLoaded', ()=>{
-  try{ document.getElementById('sendBtn')?.addEventListener('click', ()=>{ try{ sendLeadToBitrix(); }catch(_){ } }, {passive:true}); }catch(_){ }
-
   $$('.card .btn.add').forEach(btn=>{
     btn.onclick = ()=>{
       const id = btn.closest('.card').dataset.id;
@@ -172,6 +173,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
   $('#leadForm').addEventListener('submit', async (e)=>{
     e.preventDefault();
     $('#sendBtn').disabled = true;
+    try{ sendLeadToBitrix(); }catch(_){ }
     try{ await sendToTelegram(); alert('Заявка отправлена!'); openAside(false); e.target.reset(); }
     catch{ alert('Не удалось отправить. Попробуйте позже.'); }
     finally{ $('#sendBtn').disabled = false; }
