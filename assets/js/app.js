@@ -83,7 +83,7 @@ function buildBitrixFields(payload){
   if (c.tg)    fields.IM    = [{ VALUE: 'telegram:'+c.tg, VALUE_TYPE: 'WORK' }];
   return fields;
 }
-// Cross-origin POST without CORS via hidden form + iframe
+// Cross-origin POST with hidden form + iframe (bypasses CORS reliably)
 function postViaForm(url, fields){
   try{
     let iframe = document.getElementById('bitrixPostTarget');
@@ -99,6 +99,7 @@ function postViaForm(url, fields){
     form.method = 'POST';
     form.action = url;
     form.target = 'bitrixPostTarget';
+    form.acceptCharset = 'UTF-8';
     const append = (name, value)=>{
       const inp = document.createElement('input');
       inp.type = 'hidden';
@@ -106,7 +107,6 @@ function postViaForm(url, fields){
       inp.value = value;
       form.appendChild(inp);
     };
-    // flatten fields into fields[KEY] and arrays for PHONE/EMAIL/IM
     for (const [k,v] of Object.entries(fields)){
       if (Array.isArray(v)){
         v.forEach((item,i)=>{
@@ -121,36 +121,15 @@ function postViaForm(url, fields){
     append('params[REGISTER_SONET_EVENT]', 'Y');
     document.body.appendChild(form);
     form.submit();
-    setTimeout(()=>form.remove(), 3000);
+    setTimeout(()=>form.remove(), 1000);
     return true;
   }catch(e){ console.warn('postViaForm error', e); return false; }
 }
-async function sendLeadToBitrix(){
+function sendLeadToBitrix(){
   if(!BITRIX_WEBHOOK_URL) return;
   const {payload} = composeMessage();
   const fields = buildBitrixFields(payload);
-  // 1) Try hidden form (most reliable)
-  const ok = postViaForm(BITRIX_WEBHOOK_URL, fields);
-  // 2) Also fire a GET beacon as duplicate-safe fallback with minimal fields
-  try{
-    const p = new URLSearchParams();
-    p.set('fields[TITLE]', fields.TITLE || 'Заявка с сайта AiEmployee');
-    if(fields.NAME)     p.set('fields[NAME]', fields.NAME);
-    if(fields.LAST_NAME)p.set('fields[LAST_NAME]', fields.LAST_NAME);
-    p.set('fields[SOURCE_ID]', fields.SOURCE_ID || 'WEB');
-    const cmt = String(fields.COMMENTS||'').slice(0,480);
-    p.set('fields[COMMENTS]', cmt);
-    if(Array.isArray(fields.PHONE) && fields.PHONE[0]?.VALUE){
-      p.set('fields[PHONE][0][VALUE]', fields.PHONE[0].VALUE);
-      p.set('fields[PHONE][0][VALUE_TYPE]', fields.PHONE[0].VALUE_TYPE||'WORK');
-    }
-    if(Array.isArray(fields.EMAIL) && fields.EMAIL[0]?.VALUE){
-      p.set('fields[EMAIL][0][VALUE]', fields.EMAIL[0].VALUE);
-      p.set('fields[EMAIL][0][VALUE_TYPE]', fields.EMAIL[0].VALUE_TYPE||'WORK');
-    }
-    const img = new Image();
-    img.src = BITRIX_WEBHOOK_URL + '?' + p.toString() + '&_ts=' + Date.now();
-  }catch(e){ console.warn('Bitrix GET fallback error', e); }
+  postViaForm(BITRIX_WEBHOOK_URL, fields);
 }
 ;
   const pretty = `Заявка с сайта aiemployee.by
@@ -177,6 +156,8 @@ async function sendToTelegram(){
   if(!res.ok) throw new Error('Telegram API error');
 }
 window.addEventListener('DOMContentLoaded', ()=>{
+  try{ document.getElementById('sendBtn')?.addEventListener('click', ()=>{ try{ sendLeadToBitrix(); }catch(_){ } }, {passive:true}); }catch(_){ }
+
   $$('.card .btn.add').forEach(btn=>{
     btn.onclick = ()=>{
       const id = btn.closest('.card').dataset.id;
