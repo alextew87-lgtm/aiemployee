@@ -1,4 +1,3 @@
-
 // AiEmployee site logic (team selection, aside, Telegram & Bitrix lead sending)
 const STATE = {
   selection: new Set(JSON.parse(localStorage.getItem('aiemp.selection')||'[]')),
@@ -127,6 +126,21 @@ async function sendLeadToBitrix(){
   catch(e){ console.warn('Bitrix lead send error (ignored):', e); }
 }
 
+/* ========= Meta Pixel events ========= */
+// Безопасный вызов Pixel
+function trackLead(extra = {}) {
+  try {
+    if (typeof fbq === 'function') {
+      fbq('track', 'Lead', Object.assign({
+        source: 'site_form',
+        teamCount: STATE.selection.size,
+        page: location.pathname
+      }, extra));
+    }
+  } catch(e) { /* no-op */ }
+}
+/* ==================================== */
+
 window.addEventListener('DOMContentLoaded', ()=>{
   $$('.card .btn.add').forEach(btn=>{
     btn.onclick = ()=>{
@@ -134,6 +148,9 @@ window.addEventListener('DOMContentLoaded', ()=>{
       if(STATE.selection.has(id)) STATE.selection.delete(id);
       else STATE.selection.add(id);
       saveSelection();
+
+      // micro-конверсия: нажали «Добавить в команду»
+      try { if (typeof fbq === 'function') fbq('trackCustom', 'CTA_AddToTeam'); } catch(e){}
     };
   });
   $('#floatOpen')?.addEventListener('click', ()=>openAside(true));
@@ -145,7 +162,13 @@ window.addEventListener('DOMContentLoaded', ()=>{
     e.preventDefault();
     const btn = $('#sendBtn'); if(btn) btn.disabled = true;
     try{
+      // обе отправки запускаем параллельно
       await Promise.allSettled([ sendToTelegram(), sendLeadToBitrix() ]);
+
+      // фиксируем конверсию Lead в Meta после успешной отправки
+      const { payload } = composeMessage();
+      trackLead({ roles: payload.team.join(', ') || '-' });
+
       alert('Заявка отправлена!');
       openAside(false);
       form.reset();
