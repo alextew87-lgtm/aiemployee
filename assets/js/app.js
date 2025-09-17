@@ -8,6 +8,21 @@ const STATE = {
 const $ = s=>document.querySelector(s);
 const $$ = s=>document.querySelectorAll(s);
 
+/* ========= Google Ads (gtag) conversion helper ========= */
+function trackGAdsConversion(extra = {}) {
+  try {
+    if (typeof gtag === 'function') {
+      gtag('event', 'conversion', Object.assign({
+        send_to: 'AW-948603373/roIpCJnsoJsbEO2TqsQD',
+        value: 1.0,
+        currency: 'USD'
+      }, extra));
+    }
+  } catch(e) { /* no-op */ }
+}
+/* ======================================================= */
+
+
 function saveSelection(){
   localStorage.setItem('aiemp.selection', JSON.stringify([...STATE.selection]));
   renderFloat(); renderAsideList(); syncButtons();
@@ -168,7 +183,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
       // фиксируем конверсию Lead в Meta после успешной отправки
       const { payload } = composeMessage();
       trackLead({ roles: payload.team.join(', ') || '-' });
-
+trackGAdsConversion({ transaction_id: payload.ts });
       alert('Заявка отправлена!');
       openAside(false);
       form.reset();
