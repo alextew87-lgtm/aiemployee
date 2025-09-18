@@ -3,12 +3,13 @@ const STATE = {
   selection: new Set(JSON.parse(localStorage.getItem('aiemp.selection')||'[]')),
   TELEGRAM_BOT_TOKEN: '8097478338:AAGb-aDrc7nSTgG5P_Oolk_KIHWMUCQlNtg',
   TELEGRAM_CHAT_ID: '-4885519582',
-  BITRIX_WEBHOOK_URL: 'https://aiemployee.bitrix24.by/rest/1/t7fjlci82tji0e94/crm.lead.add.json'
+  BITRIX_WEBHOOK_URL: 'https://aiemployee.bitrix24.by/rest/1/t7fjlci82tji0e94/crm.lead.add.json',
+  METRIKA_ID: 104158481, // ваш счетчик Метрики
 };
 const $ = s=>document.querySelector(s);
 const $$ = s=>document.querySelectorAll(s);
 
-/* ========= Google Ads (gtag) conversion helper ========= */
+/* ========= Helpers: Metrics ========= */
 function trackGAdsConversion(extra = {}) {
   try {
     if (typeof gtag === 'function') {
@@ -20,8 +21,23 @@ function trackGAdsConversion(extra = {}) {
     }
   } catch(e) { /* no-op */ }
 }
-/* ======================================================= */
-
+function trackYandexGoal(name, params = {}) {
+  try {
+    if (typeof ym === 'function') ym(STATE.METRIKA_ID, 'reachGoal', name, params);
+  } catch(e) { /* no-op */ }
+}
+function trackLead(extra = {}) {
+  try {
+    if (typeof fbq === 'function') {
+      fbq('track', 'Lead', Object.assign({
+        source: 'site_form',
+        teamCount: STATE.selection.size,
+        page: location.pathname
+      }, extra));
+    }
+  } catch(e) { /* no-op */ }
+}
+/* ==================================== */
 
 function saveSelection(){
   localStorage.setItem('aiemp.selection', JSON.stringify([...STATE.selection]));
@@ -137,25 +153,13 @@ async function sendLeadToBitrix(){
     else form.append(`fields[${k}]`, v);
   }
   form.append('params[REGISTER_SONET_EVENT]','Y');
+
+  // ВАЖНО: используем no-cors для стабильной отправки, но её успех мы не можем проверить из браузера.
   try{ await fetch(url, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}, body: form }); }
   catch(e){ console.warn('Bitrix lead send error (ignored):', e); }
 }
 
-/* ========= Meta Pixel events ========= */
-// Безопасный вызов Pixel
-function trackLead(extra = {}) {
-  try {
-    if (typeof fbq === 'function') {
-      fbq('track', 'Lead', Object.assign({
-        source: 'site_form',
-        teamCount: STATE.selection.size,
-        page: location.pathname
-      }, extra));
-    }
-  } catch(e) { /* no-op */ }
-}
-/* ==================================== */
-
+/* ========= UI & Submit ========= */
 window.addEventListener('DOMContentLoaded', ()=>{
   $$('.card .btn.add').forEach(btn=>{
     btn.onclick = ()=>{
@@ -175,21 +179,33 @@ window.addEventListener('DOMContentLoaded', ()=>{
   const form = $('#leadForm');
   form?.addEventListener('submit', async (e)=>{
     e.preventDefault();
+    if (window.__leadLock) return;
+    window.__leadLock = true;
+
     const btn = $('#sendBtn'); if(btn) btn.disabled = true;
     try{
-      // обе отправки запускаем параллельно
-      await Promise.allSettled([ sendToTelegram(), sendLeadToBitrix() ]);
+      // 1) Требуем реальный успех Telegram
+      await sendToTelegram();
 
-      // фиксируем конверсию Lead в Meta после успешной отправки
+      // 2) Фиксируем конверсию ТОЛЬКО ПОСЛЕ успеха Telegram
       const { payload } = composeMessage();
+      trackYandexGoal('lead_sent', { teamCount: STATE.selection.size });
+      trackGAdsConversion({ transaction_id: payload.ts });
       trackLead({ roles: payload.team.join(', ') || '-' });
-trackGAdsConversion({ transaction_id: payload.ts });
+
+      // 3) Параллельно отправляем в Bitrix (успех не влияет на цели из-за no-cors)
+      sendLeadToBitrix().catch(err=>console.warn('Bitrix send failed:', err));
+
       alert('Заявка отправлена!');
       openAside(false);
       form.reset();
-    }catch(_){
+    }catch(err){
+      console.error(err);
       alert('Не удалось отправить. Попробуйте позже.');
-    }finally{ if(btn) btn.disabled = false; }
+    }finally{
+      if(btn) btn.disabled = false;
+      window.__leadLock = false;
+    }
   });
 
   saveSelection();
