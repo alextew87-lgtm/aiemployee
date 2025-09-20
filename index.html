@@ -1,6 +1,75 @@
 <!doctype html>
 <html lang="ru">
 <head>
+<!-- Cookie Consent -->
+<div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Уведомление о cookies" hidden>
+  <div class="cookie-banner__text">
+    Мы используем cookies для корректной работы и улучшения сервиса.
+    <span class="cookie-banner__hint">Нажмите «Принять все», либо откройте «Настройки» для детального выбора.</span>
+    <a href="/cookies-policy.html" target="_blank" rel="noopener">Политика cookies</a>.
+  </div>
+  <div class="cookie-banner__actions">
+    <button id="cookie-accept-all" class="btn btn-primary">Принять все</button>
+    <button id="cookie-open-settings" class="btn btn-link">Настройки</button>
+  </div>
+</div>
+
+<div id="cookie-modal" class="cookie-modal" role="dialog" aria-modal="true" aria-labelledby="cookie-modal-title" hidden>
+  <div class="cookie-modal__dialog">
+    <h3 id="cookie-modal-title">Настройки cookies</h3>
+    <p>Все дополнительные cookies включены по умолчанию. Чтобы отказаться, снимите галочки и сохраните выбор.</p>
+
+    <div class="cookie-modal__actions">
+      <button type="button" id="cookie-save-master" class="btn btn-primary btn-lg">Улучшенный опыт</button>
+      <p class="muted" style="font-size:.9rem; margin-top:6px">Рекомендуется для удобства и лучшего сервиса</p>
+    </div>
+
+    <div class="providers">
+      <p class="prov-head"><b>Аналитика</b></p>
+      <label class="cookie-opt prov-grid">
+        <input type="checkbox" id="consent-ym" checked>
+        <span>
+          <span class="cookie-opt__title">Яндекс.Метрика</span>
+          <span class="cookie-opt__desc">Собирает обезличенные данные о посещаемости, кликах и навигации для анализа и оптимизации.</span>
+        </span>
+      </label>
+      <label class="cookie-opt prov-grid">
+        <input type="checkbox" id="consent-ga4" checked>
+        <span>
+          <span class="cookie-opt__title">Google Analytics 4</span>
+          <span class="cookie-opt__desc">Фиксирует события и взаимодействия, помогает строить отчёты и сегменты поведения.</span>
+        </span>
+      </label>
+    </div>
+
+    <div class="providers">
+      <p class="prov-head"><b>Маркетинг</b></p>
+      <label class="cookie-opt prov-grid">
+        <input type="checkbox" id="consent-gads" checked>
+        <span>
+          <span class="cookie-opt__title">Google Ads</span>
+          <span class="cookie-opt__desc">Связывает посещения с кампаниями, измеряет конверсии и формирует списки ремаркетинга.</span>
+        </span>
+      </label>
+      <label class="cookie-opt prov-grid">
+        <input type="checkbox" id="consent-meta" checked>
+        <span>
+          <span class="cookie-opt__title">Meta Pixel</span>
+          <span class="cookie-opt__desc">Отслеживает действия после клика по рекламе в Facebook/Instagram для оценки эффективности.</span>
+        </span>
+      </label>
+    </div>
+
+    <div class="cookie-modal__actions">
+      <button type="button" id="cookie-save-custom" class="btn btn-outline">Сохранить выбор</button>
+      <button type="button" id="cookie-cancel" class="btn">Отмена</button>
+    </div>
+  </div>
+</div>
+
+<!-- Ссылка в футере, чтобы менять выбор позже -->
+<a href="#" id="cookie-footer-link" class="cookie-footer-link">Настройки cookies</a>
+
  <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
