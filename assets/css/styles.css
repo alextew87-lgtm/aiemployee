@@ -119,3 +119,30 @@ ol.steps li::before{
 .disclaimer{color:#64748b;font-size:12px;margin-top:10px}
 .footer{padding:28px 0;color:#334155;background:var(--bg);border-top:1px solid var(--border)}
 .footer .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+
+/* Buttons */
+.btn{font:inherit; padding:10px 14px; border-radius:10px; cursor:pointer; border:1px solid transparent}
+.btn-primary{background:#111; color:#fff}
+.btn-outline{background:#fff; color:#111; border-color:#111}
+.btn-link{background:transparent; color:#0b57d0; text-decoration:underline; border:none; padding:8px 6px}
+.btn-lg{padding:12px 18px; font-size:1rem; border-radius:12px}
+
+/* Banner */
+.cookie-banner{position:fixed; left:0; right:0; bottom:0; z-index:9999; background:#fff; color:#111; border-top:1px solid #e5e7eb; padding:16px; display:flex; gap:16px; align-items:center; flex-wrap:wrap; box-shadow:0 -6px 24px rgba(0,0,0,.06)}
+.cookie-banner__text{flex:1 1 320px; line-height:1.5}
+.cookie-banner__hint{display:block; color:#444}
+.cookie-banner__actions{display:flex; gap:8px; align-items:center}
+.cookie-footer-link{display:inline-block; font-size:.95rem}
+
+/* Modal */
+.cookie-modal{position:fixed; inset:0; background:rgba(0,0,0,.3); display:grid; place-items:center; z-index:10000}
+.cookie-modal__dialog{width:min(680px,92vw); background:#fff; color:#111; border-radius:16px; padding:20px; box-shadow:0 20px 60px rgba(0,0,0,.15)}
+.cookie-opt{display:grid; grid-template-columns:24px 1fr; gap:10px; align-items:start; margin:12px 0}
+.cookie-opt__title{font-weight:600; display:block}
+.cookie-opt__desc{display:block; font-size:.9rem; color:#444}
+.cookie-modal__actions{margin-top:16px; display:flex; gap:8px; flex-wrap:wrap}
+.providers{border:1px solid #e5e7eb; border-radius:12px; padding:10px; background:#fff; margin-top:6px}
+.prov-head{font-size:.92rem; color:#222; margin:2px 0 8px}
+.prov-grid{display:grid; grid-template-columns:24px 1fr; gap:10px; align-items:start}
+
+[hidden]{display:none !important}
