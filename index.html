@@ -1,104 +1,7 @@
 <!doctype html>
 <html lang="ru">
 <head>
-<!-- Cookie Consent -->
-<div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Уведомление о cookies" hidden>
-  <div class="cookie-banner__text">
-    Мы используем cookies для корректной работы и улучшения сервиса.
-    <span class="cookie-banner__hint">Нажмите «Принять все», либо откройте «Настройки» для детального выбора.</span>
-    <a href="/cookies-policy.html" target="_blank" rel="noopener">Политика cookies</a>.
-  </div>
-  <div class="cookie-banner__actions">
-    <button id="cookie-accept-all" class="btn btn-primary">Принять все</button>
-    <button id="cookie-open-settings" class="btn btn-link">Настройки</button>
-  </div>
-</div>
-
-<div id="cookie-modal" class="cookie-modal" role="dialog" aria-modal="true" aria-labelledby="cookie-modal-title" hidden>
-  <div class="cookie-modal__dialog">
-    <h3 id="cookie-modal-title">Настройки cookies</h3>
-    <p>Все дополнительные cookies включены по умолчанию. Чтобы отказаться, снимите галочки и сохраните выбор.</p>
-
-    <div class="cookie-modal__actions">
-      <button type="button" id="cookie-save-master" class="btn btn-primary btn-lg">Улучшенный опыт</button>
-      <p class="muted" style="font-size:.9rem; margin-top:6px">Рекомендуется для удобства и лучшего сервиса</p>
-    </div>
-
-    <div class="providers">
-      <p class="prov-head"><b>Аналитика</b></p>
-      <label class="cookie-opt prov-grid">
-        <input type="checkbox" id="consent-ym" checked>
-        <span>
-          <span class="cookie-opt__title">Яндекс.Метрика</span>
-          <span class="cookie-opt__desc">Собирает обезличенные данные о посещаемости, кликах и навигации для анализа и оптимизации.</span>
-        </span>
-      </label>
-      <label class="cookie-opt prov-grid">
-        <input type="checkbox" id="consent-ga4" checked>
-        <span>
-          <span class="cookie-opt__title">Google Analytics 4</span>
-          <span class="cookie-opt__desc">Фиксирует события и взаимодействия, помогает строить отчёты и сегменты поведения.</span>
-        </span>
-      </label>
-    </div>
-
-    <div class="providers">
-      <p class="prov-head"><b>Маркетинг</b></p>
-      <label class="cookie-opt prov-grid">
-        <input type="checkbox" id="consent-gads" checked>
-        <span>
-          <span class="cookie-opt__title">Google Ads</span>
-          <span class="cookie-opt__desc">Связывает посещения с кампаниями, измеряет конверсии и формирует списки ремаркетинга.</span>
-        </span>
-      </label>
-      <label class="cookie-opt prov-grid">
-        <input type="checkbox" id="consent-meta" checked>
-        <span>
-          <span class="cookie-opt__title">Meta Pixel</span>
-          <span class="cookie-opt__desc">Отслеживает действия после клика по рекламе в Facebook/Instagram для оценки эффективности.</span>
-        </span>
-      </label>
-    </div>
-
-    <div class="cookie-modal__actions">
-      <button type="button" id="cookie-save-custom" class="btn btn-outline">Сохранить выбор</button>
-      <button type="button" id="cookie-cancel" class="btn">Отмена</button>
-    </div>
-  </div>
-</div>
-
-<!-- Ссылка в футере, чтобы менять выбор позже -->
-<a href="#" id="cookie-footer-link" class="cookie-footer-link">Настройки cookies</a>
-
- <!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '637099655862791');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=637099655862791&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
- <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-948603373">
-</script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-948603373');
-</script>
-  
-  <meta charset="utf-8">
+<meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>AIEmployee — виртуальные сотрудники для бизнеса</title>
   <link rel="canonical" href="https://aiemployee.by/">
@@ -115,6 +18,26 @@ src="https://www.facebook.com/tr?id=637099655862791&ev=PageView&noscript=1"
         href="assets/img/hero-laptop-1200.webp"
         imagesrcset="assets/img/hero-laptop-800.webp 800w, assets/img/hero-laptop-1200.webp 1200w, assets/img/hero-laptop-1600.webp 1600w"
         imagesizes="(max-width: 900px) 92vw, 84vw">
+
+  <!-- Cookie UI styles -->
+  <style>
+    .cookie-banner{position:fixed;left:0;right:0;bottom:0;z-index:9999;background:#fff;color:#111;border-top:1px solid #e5e7eb;padding:16px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;box-shadow:0 -6px 24px rgba(0,0,0,.06)}
+    .cookie-banner__text{flex:1 1 320px;line-height:1.5}
+    .cookie-banner__hint{display:block;color:#444}
+    .cookie-banner__actions{display:flex;gap:8px;align-items:center}
+    .cookie-modal{position:fixed;inset:0;background:rgba(0,0,0,.3);display:grid;place-items:center;z-index:10000}
+    .cookie-modal__dialog{width:min(680px,92vw);background:#fff;color:#111;border-radius:16px;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,.15)}
+    .cookie-opt{display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:start;margin:12px 0}
+    .cookie-opt__title{font-weight:600;display:block}
+    .cookie-opt__desc{display:block;font-size:.9rem;color:#444}
+    .cookie-modal__actions{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}
+    .providers{border:1px solid #e5e7eb;border-radius:12px;padding:10px;background:#fff;margin-top:6px}
+    .prov-head{font-size:.92rem;color:#222;margin:2px 0 8px}
+    .prov-grid{display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:start}
+    .cookie-footer-link{display:inline-block;font-size:.95rem}
+    [hidden]{display:none !important}
+  </style>
+
 </head>
 <body>
   <!-- build-20250818T195735Z -->
@@ -412,20 +335,114 @@ src="https://www.facebook.com/tr?id=637099655862791&ev=PageView&noscript=1"
     </aside>
   </div>
 
-  <script src="assets/js/app.js?v=build-20250818T195735Z"></script>
-       <!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=104158481', 'ym');
+  
+  <!-- Cookie Consent -->
+  <div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Уведомление о cookies" hidden>
+    <div class="cookie-banner__text">
+      Мы используем cookies для корректной работы и улучшения сервиса.
+      <span class="cookie-banner__hint">Нажмите «Принять все», либо откройте «Настройки» для детального выбора.</span>
+      <a href="/cookies-policy.html" target="_blank" rel="noopener">Политика cookies</a>.
+    </div>
+    <div class="cookie-banner__actions">
+      <button id="cookie-accept-all" class="btn btn-primary">Принять все</button>
+      <button id="cookie-open-settings" class="btn btn-link">Настройки</button>
+    </div>
+  </div>
 
-    ym(104158481, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/104158481" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
+  <div id="cookie-modal" class="cookie-modal" role="dialog" aria-modal="true" aria-labelledby="cookie-modal-title" hidden>
+    <div class="cookie-modal__dialog">
+      <h3 id="cookie-modal-title">Настройки cookies</h3>
+      <p>Все дополнительные cookies включены по умолчанию. Чтобы отказаться, снимите галочки и сохраните выбор.</p>
 
+      <div class="cookie-modal__actions">
+        <button type="button" id="cookie-save-master" class="btn btn-primary btn-lg">Улучшенный опыт</button>
+        <p class="muted" style="font-size:.9rem; margin-top:6px">Рекомендуется для удобства и лучшего сервиса</p>
+      </div>
+
+      <div class="providers">
+        <p class="prov-head"><b>Аналитика</b></p>
+        <label class="cookie-opt prov-grid">
+          <input type="checkbox" id="consent-ym" checked>
+          <span>
+            <span class="cookie-opt__title">Яндекс.Метрика</span>
+            <span class="cookie-opt__desc">Собирает обезличенные данные о посещаемости, кликах и навигации для анализа и оптимизации.</span>
+          </span>
+        </label>
+        <label class="cookie-opt prov-grid">
+          <input type="checkbox" id="consent-ga4" checked>
+          <span>
+            <span class="cookie-opt__title">Google Analytics 4</span>
+            <span class="cookie-opt__desc">Фиксирует события и взаимодействия, помогает строить отчёты и сегменты поведения.</span>
+          </span>
+        </label>
+      </div>
+
+      <div class="providers">
+        <p class="prov-head"><b>Маркетинг</b></p>
+        <label class="cookie-opt prov-grid">
+          <input type="checkbox" id="consent-gads" checked>
+          <span>
+            <span class="cookie-opt__title">Google Ads</span>
+            <span class="cookie-opt__desc">Связывает посещения с кампаниями, измеряет конверсии и формирует списки ремаркетинга.</span>
+          </span>
+        </label>
+        <label class="cookie-opt prov-grid">
+          <input type="checkbox" id="consent-meta" checked>
+          <span>
+            <span class="cookie-opt__title">Meta Pixel</span>
+            <span class="cookie-opt__desc">Отслеживает действия после клика по рекламе в Facebook/Instagram для оценки эффективности.</span>
+          </span>
+        </label>
+      </div>
+
+      <div class="cookie-modal__actions">
+        <button type="button" id="cookie-save-custom" class="btn btn-outline">Сохранить выбор</button>
+        <button type="button" id="cookie-cancel" class="btn">Отмена</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ссылка для открытия настроек из футера -->
+  <a href="#" id="cookie-footer-link" class="cookie-footer-link">Настройки cookies</a>
+
+
+  <!-- Lazy providers: loaded only after consent -->
+  <script type="text/plain" data-consent="analytics" data-consent-provider="ym">
+    (function(){
+      var s=document.createElement('script');
+      s.async=1; s.src="https://mc.yandex.ru/metrika/tag.js";
+      s.onload=function(){
+        try{ ym(104158481, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); }catch(e){}
+      };
+      document.head.appendChild(s);
+    })();
+  </script>
+
+  <script type="text/plain" data-consent="marketing" data-consent-provider="gads">
+    (function(){
+      if(!window.__gtagLoaded){
+        var s=document.createElement('script'); s.async=1;
+        s.src="https://www.googletagmanager.com/gtag/js?id=AW-948603373";
+        s.onload=function(){ window.__gtagLoaded=true; go(); };
+        document.head.appendChild(s);
+      } else { go(); }
+      function go(){
+        window.dataLayer=window.dataLayer||[];
+        function gtag(){ dataLayer.push(arguments); } window.gtag=window.gtag||gtag;
+        gtag('js', new Date());
+        gtag('config','AW-948603373');
+      }
+    })();
+  </script>
+
+  <script type="text/plain" data-consent="marketing" data-consent-provider="meta">
+    (function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=1;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)})(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','637099655862791');
+    fbq('track','PageView');
+  </script>
+<script src="assets/js/app.js?v=build-20250818T195735Z"></script>
 </body>
 </html>
