@@ -146,3 +146,19 @@ ol.steps li::before{
 .prov-grid{display:grid; grid-template-columns:24px 1fr; gap:10px; align-items:start}
 
 [hidden]{display:none !important}
+
+
+/* ===== Cookie Modal — compact overrides (v1) ===== */
+.cookie-modal__dialog{
+  width: clamp(360px, 48vw, 560px);   /* was: min(680px,92vw) */
+  padding: 16px;                      /* was: 20px */
+  max-height: min(86vh, 640px);
+  overflow: auto;
+}
+.cookie-modal__dialog h3{ font-size: 1.15rem; margin: 0 0 6px; }
+.cookie-modal .btn{ padding: 8px 12px; border-radius: 10px; }
+.cookie-modal .btn.btn-primary.btn-lg{ padding: 10px 14px; font-size: .95rem; }
+.prov-head{ margin: 2px 0 6px; }
+.providers{ padding: 8px; }
+.cookie-opt{ grid-template-columns: 20px 1fr; gap: 8px; margin: 8px 0; }
+.cookie-opt__desc{ font-size: .85rem; line-height: 1.35; }
