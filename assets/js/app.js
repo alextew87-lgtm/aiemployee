@@ -210,3 +210,101 @@ window.addEventListener('DOMContentLoaded', ()=>{
 
   saveSelection();
 });
+// ===== Cookie Consent (v4) =====
+(function(){
+  const LS_KEY = 'cookieConsent.v4';
+  const $ = (s) => document.querySelector(s);
+
+  const banner = $('#cookie-banner');
+  const modal  = $('#cookie-modal');
+
+  const btnAll   = $('#cookie-accept-all');
+  const btnOpen  = $('#cookie-open-settings');
+  const btnSaveMaster = $('#cookie-save-master'); // «Улучшенный опыт»
+  const btnSaveCustom = $('#cookie-save-custom');
+  const btnCancel = $('#cookie-cancel');
+  const footerLink = $('#cookie-footer-link');
+
+  const cbYM   = $('#consent-ym');
+  const cbGA4  = $('#consent-ga4');
+  const cbGADS = $('#consent-gads');
+  const cbMETA = $('#consent-meta');
+
+  const getConsent = () => { try { return JSON.parse(localStorage.getItem(LS_KEY)); } catch(_) { return null; } };
+  const setConsent = (obj) => localStorage.setItem(LS_KEY, JSON.stringify(obj));
+
+  function providerOk(consent, el){
+    const cat  = el.getAttribute('data-consent');              // analytics | marketing
+    const prov = el.getAttribute('data-consent-provider');     // ym | ga4 | gads | meta (опц.)
+    const catOk = (cat === 'analytics') ? !!consent.analytics : !!consent.marketing;
+    const provOk = prov ? !!(consent.providers && consent.providers[prov]) : true;
+    return catOk && provOk;
+  }
+
+  function applyConsent(consent){
+    document.querySelectorAll('script[data-consent]').forEach(el => {
+      if (providerOk(consent, el) && !el.dataset.loaded) {
+        // ВАЖНО: вместо прямой подстановки src используем реконструкцию,
+        // чтобы выполнить inline-инициализацию ПОСЛЕ загрузки внешних файлов (см. «обёртки» ниже).
+        const s = document.createElement('script');
+        if (el.src) s.src = el.src;
+        s.type = el.type === 'text/plain' ? 'text/javascript' : (el.type || 'text/javascript');
+        if (!el.src) s.text = el.text || el.innerHTML;
+        [...el.attributes].forEach(a => {
+          if (!a.name.startsWith('data-') && a.name !== 'type') s.setAttribute(a.name, a.value);
+        });
+        el.replaceWith(s);
+        s.dataset.loaded = '1';
+      }
+    });
+  }
+
+  const show = el => el && el.removeAttribute('hidden');
+  const hide = el => el && el.setAttribute('hidden','');
+
+  // init
+  const existing = getConsent();
+  if (existing){ hide(banner); applyConsent(existing); }
+  else { show(banner); }
+
+  // Banner
+  btnAll?.addEventListener('click', () => {
+    const c = { analytics:true, marketing:true, ts:Date.now(), providers:{ ym:true, ga4:true, gads:true, meta:true } };
+    setConsent(c); applyConsent(c); hide(banner);
+  });
+
+  // Open settings
+  function openSettings(){
+    const c = getConsent();
+    if (c) {
+      const p = c.providers || {};
+      cbYM.checked   = !!p.ym;   cbGA4.checked  = !!p.ga4;
+      cbGADS.checked = !!p.gads; cbMETA.checked = !!p.meta;
+    } else {
+      // Первый заход: всё уже включено (opt-out в настройках)
+      cbYM.checked = cbGA4.checked = cbGADS.checked = cbMETA.checked = true;
+    }
+    show(modal);
+  }
+  btnOpen?.addEventListener('click', openSettings);
+  footerLink?.addEventListener('click', (e)=>{ e.preventDefault(); openSettings(); });
+
+  // «Улучшенный опыт» = принять всё и закрыть
+  btnSaveMaster?.addEventListener('click', () => {
+    const c = { analytics:true, marketing:true, ts:Date.now(), providers:{ ym:true, ga4:true, gads:true, meta:true } };
+    setConsent(c); applyConsent(c); hide(modal); hide(banner);
+  });
+
+  // Сохранить кастомный выбор (пользователь снимает галочки по одному)
+  btnSaveCustom?.addEventListener('click', () => {
+    const c = {
+      analytics: (cbYM.checked || cbGA4.checked),
+      marketing: (cbGADS.checked || cbMETA.checked),
+      ts: Date.now(),
+      providers: { ym:cbYM.checked, ga4:cbGA4.checked, gads:cbGADS.checked, meta:cbMETA.checked }
+    };
+    setConsent(c); applyConsent(c); hide(modal); hide(banner);
+  });
+
+  btnCancel?.addEventListener('click', () => hide(modal));
+})();
