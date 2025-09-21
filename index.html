@@ -328,7 +328,10 @@
         <input name="contact" placeholder="+375..., email или Telegram">
         <label>Комментарий</label>
         <textarea name="comment" placeholder="Коротко о задачах, сроках, интеграциях"></textarea>
-        <p class="small">Если токен Telegram не настроен — текст заявки скопируется в буфер обмена.</p>
+        <p id="pd-consent" class="small muted" style="margin-top:8px">
+        Отправляя форму, вы соглашаетесь на обработку персональных данных и подтверждаете ознакомление с
+        <a href="/privacy.html" target="_blank" rel="noopener">Политикой конфиденциальности</a>.
+        </p>
         <button class="btn" id="sendBtn" type="submit">Отправить заявку</button>
       </form>
     </aside>
