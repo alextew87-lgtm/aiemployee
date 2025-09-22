@@ -1,14 +1,17 @@
-/* assets/js/app.js — cookie consent + provider loader (v6)
-   Changes from v5: removed fbq shim to avoid blocking Meta Pixel loader.
+/* assets/js/app.js — cookie consent + provider loader (v5)
+   - Баннера: «Принять все» и «Настройки»
+   - В модалке: «Улучшенный опыт» (= принять все) и индивидуальные чекбоксы
+   - Скрипты провайдеров загружаются из <script type="text/plain" data-consent ...>
+     сразу после сохранения согласия + на последующих загрузках, если согласие уже есть.
 */
 (function(){
-  var LS_KEY = 'cookieConsent.v6';
+  var LS_KEY = 'cookieConsent.v5'; // bump версия ключа, чтобы корректно переинициализировать
   var q = function(s){ return document.querySelector(s); };
 
   // --- Utils: state ---
   function getConsent(){
     try {
-      var raw = localStorage.getItem(LS_KEY) || localStorage.getItem('cookieConsent.v5') || localStorage.getItem('cookieConsent.v4');
+      var raw = localStorage.getItem(LS_KEY) || localStorage.getItem('cookieConsent.v4');
       return raw ? JSON.parse(raw) : null;
     } catch(e){ return null; }
   }
@@ -55,11 +58,12 @@
     });
   }
 
-  // --- Safe shims (gtag only). fbq shim removed to not block Meta loader. ---
+  // --- Safe shims, чтобы код конверсий не падал до загрузки настоящих SDK ---
   window.dataLayer = window.dataLayer || [];
   window.gtag = window.gtag || function(){ dataLayer.push(arguments); };
+  window.fbq  = window.fbq  || function(){ (window.fbq.q = window.fbq.q || []).push(arguments); };
 
-  // --- Elements ---
+  // --- Elements (делаем безопасные обращения, если на странице нет баннера/модалки) ---
   var banner = q('#cookie-banner');
   var modal  = q('#cookie-modal');
 
@@ -75,7 +79,7 @@
   var cbGADS = q('#consent-gads');
   var cbMETA = q('#consent-meta');
 
-  // --- Init: show banner or apply existing consent ---
+  // --- Init: show banner or apply existing consent
   var existing = getConsent();
   if (existing){
     hide(banner);
@@ -127,16 +131,22 @@
   btnSaveCustom && btnSaveCustom.addEventListener('click', saveCustom);
   btnCancel && btnCancel.addEventListener('click', function(){ hide(modal); });
 
-  // --- Fallback: react to direct localStorage writes ---
+  // --- Fallback: если кто-то в проекте вручную пишет localStorage.setItem(LS_KEY, ...),
+  //     подхватим изменения и загрузим провайдеров "на лету".
   try {
     var origSet = localStorage.setItem;
     localStorage.setItem = function(k, v){
       origSet.apply(this, arguments);
-      if (k === LS_KEY || k === 'cookieConsent.v5' || k === 'cookieConsent.v4'){
+      if (k === LS_KEY){
         try { loadProviders(JSON.parse(v)); } catch(e){}
       }
     };
   } catch(e){}
 
-  window.__cookieConsent = { get: getConsent, set: setConsent, load: loadProviders };
+  // --- Экспорт для отладки (не обязательно) ---
+  window.__cookieConsent = {
+    get: getConsent,
+    set: setConsent,
+    load: loadProviders
+  };
 })();
