@@ -1,350 +1,79 @@
 <!doctype html>
 <html lang="ru">
 <head>
-<meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>AIEmployee — виртуальные сотрудники для бизнеса</title>
-  <link rel="canonical" href="https://aiemployee.by/">
-  <meta name="theme-color" content="#0e0f12">
-  <meta property="og:title" content="AiEmployee — виртуальные сотрудники для бизнеса">
-  <meta property="og:description" content="Соберите команду из AI‑сотрудников: администратор, продажи, SMM, копирайтер, дизайнер, ассистент, аналитик, юрист, финансист, техподдержка.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://aiemployee.by/">
-  <link rel="stylesheet" href="assets/css/styles.css?v=build-20250818T195735Z">
-  <link rel="stylesheet" href="assets/css/brand.css?v=1">
-  <link rel="stylesheet" href="assets/css/hero-patch.css?v=1">
-  <link rel="stylesheet" href="assets/css/hero-image-scale.css?v=2">
-  <link rel="preload" as="image"
-        href="assets/img/hero-laptop-1200.webp"
-        imagesrcset="assets/img/hero-laptop-800.webp 800w, assets/img/hero-laptop-1200.webp 1200w, assets/img/hero-laptop-1600.webp 1600w"
-        imagesizes="(max-width: 900px) 92vw, 84vw">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cookie Consent — Принять + Настройки (провайдеры, с пояснениями)</title>
+<style>
+  :root{ --text:#111; --muted:#444; --border:#e5e7eb; --link:#0b57d0; --bg:#fff; }
+  *{box-sizing:border-box}
+  body{margin:0; font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif; color:var(--text); background:var(--bg)}
+  header{padding:32px 16px; border-bottom:1px solid var(--border)}
+  .container{max-width:1000px; margin:0 auto; padding:24px 16px}
+  h1{margin:0 0 6px}
+  p.muted{color:var(--muted)}
+  footer{padding:24px 16px; border-top:1px solid var(--border)}
+  a{color:var(--link)}
 
-  <!-- Cookie UI styles -->
-  <style>
-    .cookie-banner{position:fixed;left:0;right:0;bottom:0;z-index:9999;background:#fff;color:#111;border-top:1px solid #e5e7eb;padding:16px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;box-shadow:0 -6px 24px rgba(0,0,0,.06)}
-    .cookie-banner__text{flex:1 1 320px;line-height:1.5}
-    .cookie-banner__hint{display:block;color:#444}
-    .cookie-banner__actions{display:flex;gap:8px;align-items:center}
-    .cookie-modal{position:fixed;inset:0;background:rgba(0,0,0,.3);display:grid;place-items:center;z-index:10000}
-    .cookie-modal__dialog{width:min(680px,92vw);background:#fff;color:#111;border-radius:16px;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,.15)}
-    .cookie-opt{display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:start;margin:12px 0}
-    .cookie-opt__title{font-weight:600;display:block}
-    .cookie-opt__desc{display:block;font-size:.9rem;color:#444}
-    .cookie-modal__actions{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}
-    .providers{border:1px solid #e5e7eb;border-radius:12px;padding:10px;background:#fff;margin-top:6px}
-    .prov-head{font-size:.92rem;color:#222;margin:2px 0 8px}
-    .prov-grid{display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:start}
-    .cookie-footer-link{display:inline-block;font-size:.95rem}
-    [hidden]{display:none !important}
-  </style>
+  .cookie-banner{position:fixed; left:0; right:0; bottom:0; z-index:9999; background:#fff; color:#111; border-top:1px solid var(--border); padding:16px; display:flex; gap:16px; align-items:center; flex-wrap:wrap; box-shadow:0 -6px 24px rgba(0,0,0,.06)}
+  .cookie-banner__text{flex:1 1 320px; line-height:1.5}
+  .cookie-banner__actions{display:flex; gap:8px; align-items:center}
+  .cookie-banner__hint{display:block; color:#444}
+  .btn{font:inherit; padding:10px 14px; border-radius:10px; cursor:pointer; border:1px solid transparent}
+  .btn-primary{background:#111; color:#fff}
+  .btn-outline{background:#fff; color:#111; border-color:#111}
+  .btn-link{background:transparent; color:#0b57d0; text-decoration:underline; border:none; padding:8px 6px}
 
+  .cookie-modal{position:fixed; inset:0; background:rgba(0,0,0,.3); display:grid; place-items:center; z-index:10000}
+  .cookie-modal__dialog{width:min(680px,92vw); background:#fff; color:#111; border-radius:16px; padding:20px; box-shadow:0 20px 60px rgba(0,0,0,.15)}
+  .cookie-opt{display:grid; grid-template-columns:24px 1fr; gap:10px; align-items:start; margin:12px 0}
+  .cookie-opt__title{font-weight:600; display:block}
+  .cookie-opt__desc{display:block; font-size:.9rem; color:#444}
+  .cookie-modal__actions{margin-top:16px; display:flex; gap:8px; flex-wrap:wrap}
+  .cookie-footer-link{display:inline-block; font-size:.95rem}
+  [hidden]{display:none !important}
+  .providers{border:1px solid var(--border); border-radius:12px; padding:10px; background:#fff; margin-top:6px}
+  .prov-head{font-size:.92rem; color:#222; margin:2px 0 8px}
+  .prov-grid{display:grid; grid-template-columns:24px 1fr; gap:10px; align-items:start}
+
+  .card{border:1px solid var(--border); border-radius:16px; padding:16px; background:#fff}
+  .grid{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+  .kbd{font:12px/1 ui-monospace,Menlo,Consolas,monospace; background:#f6f7f9; border:1px solid var(--border); padding:4px 6px; border-radius:6px; white-space:pre-wrap}
+</style>
 </head>
 <body>
-  <!-- build-20250818T195735Z -->
-  <header class="site">
-    <div class="container row">
-      <div><a class="brand" href="/" aria-label="AiEmployee">  <img src="assets/img/logo-aie-256.webp"        srcset="assets/img/logo-aie-256.webp 1x, assets/img/logo-aie-512.webp 2x, assets/img/logo-aie-512.webp 3x, assets/img/logo-aie-1024.webp 4x"        alt="AiEmployee"></a></div>
-      <nav>
-        <a href="#how">Как это работает</a>
-        <a href="#catalog">Команда</a>
-        <a href="#cases">Кейсы</a>
-        <a href="#faq">FAQ</a>
-        <a class="btn" href="#catalog">Начать</a>
-      </nav>
+  <header>
+    <div class="container">
+      <h1>Демо: «Принять» + «Настройки», все галочки включены</h1>
+      <p class="muted">В настройках все провайдеры включены по умолчанию. Кнопка «Улучшенный опыт» работает как быстрый приём всех cookies. Чтобы отключить — нужно снять галочки вручную и подтвердить.</p>
     </div>
   </header>
-
-  <section class="hero" id="home">
-  <div class="container hero-grid">
-    <div class="hero-copy">
-<h1>AIEmployee — платформа для найма AI‑сотрудников</h1>
-      <p>Снижайте расходы до 90% и ускоряйте бизнес в 10 раз с помощью виртуальных сотрудников.</p>
-      <div class="cta">
-        <a class="btn" href="#catalog">Познакомиться с AI‑командой</a>
-        <a class="btn secondary" href="#how">Как это работает</a>
+  <main class="container">
+    <div class="grid">
+      <div class="card">
+        <h3>Статус согласия</h3>
+        <p>analytics: <span id="st-analytics" class="kbd">—</span></p>
+        <p>marketing: <span id="st-marketing" class="kbd">—</span></p>
+        <p class="muted">Провайдеры: ym=<span id="st-ym" class="kbd">—</span>, ga4=<span id="st-ga4" class="kbd">—</span>, gads=<span id="st-gads" class="kbd">—</span>, meta=<span id="st-meta" class="kbd">—</span></p>
+        <button id="reset-consent" class="btn btn-outline">Сбросить и показать баннер</button>
+      </div>
+      <div class="card">
+        <h3>Проверка загрузки скриптов</h3>
+        <div id="demo-log" class="kbd">Лог пуст…</div>
       </div>
     </div>
-    <figure class="hero-art laptop" aria-hidden="true">
-      <picture>
-        <source type="image/webp"
-                srcset="assets/img/hero-laptop-800.webp 800w, assets/img/hero-laptop-1200.webp 1200w, assets/img/hero-laptop-1600.webp 1600w"
-                sizes="(max-width: 900px) 92vw, 84vw">
-        <img src="assets/img/hero-laptop-1200.webp" alt="Экран с карточками AI‑сотрудников на ноутбуке" loading="eager" decoding="async" fetchpriority="high" width="1200">
-      </picture>
-    </figure>
-  </div>
-</section>
-
-  <section class="section" id="how">
+  </main>
+  <footer>
     <div class="container">
-      <h2>Как это работает</h2>
-      
-<!-- how-icons patch start -->
-<style>
-  #how .how-icons{display:grid;grid-template-columns:repeat(3,minmax(220px,1fr));gap:20px;align-items:stretch;margin-top:16px}
-  #how .how-icons .item{text-align:center;padding:20px 16px;border:1px solid rgba(14,19,32,.08);border-radius:16px;background:#fff;box-shadow:0 8px 28px rgba(14,19,32,.06)}
-  #how .how-icons img{width:120px;height:auto;display:block;margin:0 auto 12px}
-  #how .how-icons .caption{font-weight:600;color:#0e1320;margin:0 0 2px}
-  #how .how-icons .desc{color:#6b7380;margin:0;font-size:14px}
-  @media (max-width:900px){#how .how-icons{grid-template-columns:1fr}}
-</style>
-<div class="how-icons">
-  <div class="item">
-    <img src="assets/img/how-step-choose.webp" alt="Выберите сотрудников в каталоге" width="120" height="120" loading="lazy" decoding="async">
-    <p class="caption">Выберите сотрудников</p>
-    <p class="desc">в каталоге</p>
-  </div>
-  <div class="item">
-    <img src="assets/img/how-step-connect.webp" alt="Подключите мессенджеры, CRM и e‑mail" width="120" height="120" loading="lazy" decoding="async">
-    <p class="caption">Подключите интеграции</p>
-    <p class="desc">мессенджеры, CRM и e‑mail</p>
-  </div>
-  <div class="item">
-    <img src="assets/img/how-step-launch.webp" alt="Получайте результат — они начинают работать сразу" width="120" height="120" loading="lazy" decoding="async">
-    <p class="caption">Запускайте</p>
-    <p class="desc">результат сразу</p>
-  </div>
-</div>
-<!-- how-icons patch end -->
-
-
-      <h2 style="margin-top:22px">Преимущества</h2>
-      <div class="bullets">
-        <div class="item"><b>Экономия до 90% на зарплатах</b> — без лишних расходов на найм и HR.</div>
-        <div class="item"><b>Рост эффективности в 5–10 раз</b> — скорость обработки задач в секунды.</div>
-        <div class="item"><b>Доступ 24/7</b> — сотрудники всегда готовы к работе.</div>
-        <div class="item"><b>Проактивность</b> — дают развёрнутые ответы, советуют решения.</div>
-        <div class="item"><b>Всегда в нужном тоне</b> — поддерживают заданный стиль общения.</div>
-        <div class="item"><b>Обучаемость</b> — осваивают материалы за секунды.</div>
-        <div class="item"><b>Идеальная память</b> — помнят всё, что вы сообщали ранее.</div>
-        <div class="item"><b>Удобная интеграция</b> — запуск за минуты.</div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section catalog" id="catalog">
-    <div class="container">
-      <h2>Каталог сотрудников (ТОП‑5)</h2>
-      <div class="grid">
-
-        <article class="card" data-id="alena">
-          <figure><span class="badge">AI</span>
-            <img src="assets/img/alena.webp" alt="Алёна — AI‑администратор" loading="eager">
-          </figure>
-          <div class="body">
-            <h3>Алёна — AI‑администратор</h3>
-            <div class="muted">Общается с клиентами, предлагает товары и услуги, записывает на визит.</div>
-            <div class="row">
-              <button class="btn add">Добавить в команду</button>
-              <a class="btn ghost" href="https://t.me/aiemployee_alena_bot" target="_blank" rel="noopener">Пообщаться сейчас</a>
-            </div>
-            <p class="small">Перейти в Telegram чат для общения с сотрудником</p>
-          </div>
-        </article>
-
-        <article class="card" data-id="lev">
-          <figure><span class="badge">AI</span>
-            <img src="assets/img/lev.webp" alt="Лев — AI‑менеджер по продажам" loading="eager">
-          </figure>
-          <div class="body">
-            <h3>Лев — AI‑менеджер по продажам</h3>
-            <div class="muted">Отвечает на вопросы и помогает закрывать сделки, отсеивает нецелевые лиды.</div>
-            <div class="row">
-              <button class="btn add">Добавить в команду</button>
-              <a class="btn ghost" href="https://t.me/aiemployee_lev_bot" target="_blank" rel="noopener">Пообщаться сейчас</a>
-            </div>
-            <p class="small">Перейти в Telegram чат для общения с сотрудником</p>
-          </div>
-        </article>
-
-        <article class="card" data-id="mark">
-          <figure><span class="badge">AI</span>
-            <img src="assets/img/irina.webp" alt="Ирина — AI‑турагент" loading="lazy">
-          </figure>
-          <div class="body">
-            <h3>Ирина — AI‑турагент</h3>
-            <div class="muted">Помогает клиентам определиться с направлением для путешествия, собирает информацию и передает "горячие" заявки менеджерам.</div>
-            <div class="row">
-              <button class="btn add">Добавить в команду</button>
-              <a class="btn ghost" href="https://t.me/aiemployee_irina_bot" target="_blank" rel="noopener">Пообщаться сейчас</a>
-            </div>
-            <p class="small">Перейти в Telegram чат для общения с сотрудником</p>
-          </div>
-        </article>
-
-        <article class="card" data-id="dmitry">
-          <figure><span class="badge">AI</span>
-            <img src="assets/img/dmitry.webp" alt="Дмитрий — AI‑юрист" loading="lazy">
-          </figure>
-          <div class="body">
-            <h3>Дмитрий — AI‑юрист</h3>
-            <div class="muted">Проверка документов на соответствие законодательству, сотавление договоров ответы на претензии.</div>
-            <div class="row">
-              <button class="btn add">Добавить в команду</button>
-              <a class="btn ghost" href="https://t.me/aiemployee_dzmitry_bot" target="_blank" rel="noopener">Пообщаться сейчас</a>
-            </div>
-            <p class="small">Перейти в Telegram чат для общения с сотрудником</p>
-          </div>
-        </article>
-
-        <article class="card" data-id="artyom">
-          <figure><span class="badge">AI</span>
-            <img src="assets/img/artyom.webp" alt="Артём — AI‑техподдержка" loading="lazy">
-          </figure>
-          <div class="body">
-            <h3>Артём — AI‑техподдержка</h3>
-            <div class="muted">Быстрые и вежливые ответы 24/7, эскалация на менеджера-человека в сложных случаях</div>
-            <div class="row">
-              <button class="btn add">Добавить в команду</button>
-              <a class="btn ghost" href="https://t.me/aiemployee_artem_bot" target="_blank" rel="noopener">Пообщаться сейчас</a>
-            </div>
-            <p class="small">Перейти в Telegram чат для общения с сотрудником</p>
-          </div>
-        </article>
-        
-<article class="card" data-id="noname">
-          <figure><span class="badge">AI</span>
-            <img src="assets/img/shadow-manager.webp" alt="AI‑сотрудник под ваш запрос" loading="lazy">
-          </figure>
-          <div class="body">
-            <h3>AI‑сотрудник под ваш запрос</h3>
-            <div class="muted">Обладает необходимыми компетенциями, использует вашу базу знаний, работает по заданному скрипту. Добавьте в команду и укажите необходимый функционал в комментариях</div>
-            <div class="row">
-              <button class="btn add">Добавить в команду</button>
-            </div>
-        </article>
-    
-  </section>
-
-  <section class="section" id="cases">
-    <div class="container">
-      <h2>Кейсы внедрения AI‑сотрудников</h2>
-      <div class="casegrid">
-        <article class="case">
-          <h3>Кейс 1. Замена администратора и менеджера по заявкам</h3>
-          <p><b>Что сделали:</b> подключили AI‑Администратора и AI‑Менеджера по продажам для обработки входящих запросов.</p>
-          <p><b>Результат:</b> скорость ответа с 20 минут до 30 секунд, конверсия +40%, экономия ≈ 3 200 BYN/мес.</p>
-        </article>
-        <article class="case">
-          <h3>Кейс 2. Оптимизация маркетинга</h3>
-          <p><b>Что сделали:</b> внедрили AI‑SMM и AI‑Копирайтера.</p>
-          <p><b>Результат:</b> за 2 недели — 60 постов и 20 объявлений, вовлечённость +55%.</p>
-        </article>
-        <article class="case">
-          <h3>Кейс 3. Финансы и аналитика</h3>
-          <p><b>Что сделали:</b> AI‑Финансист и AI‑Аналитик для еженедельной отчётности.</p>
-          <p><b>Результат:</b> отчёты — с 6 часов до 15 минут, экономия ≈ 4 000 BYN/мес.</p>
-        </article>
-      </div>
-      <div style="margin-top:12px"><a class="btn" href="#catalog">Хочу так же</a></div>
-    </div>
-  </section>
-
-  <section class="section faq" id="faq">
-  <div class="container">
-    <h2>FAQ</h2>
-
-    <details>
-      <summary>Могут ли AI-сотрудники полностью заменить реального человека?</summary>
-      <p>AI закрывает рутинные задачи и работает 24/7. Для стратегических решений человек остаётся важным, но <strong>70–80%</strong> повседневной работы можно доверить AI.</p>
-    </details>
-
-    <details>
-      <summary>Как быстро AI-сотрудник начнёт работать?</summary>
-      <p>Уже в день подключения. Достаточно выбрать сотрудника — и он сразу готов к задачам.</p>
-    </details>
-
-    <details>
-      <summary>Можно ли обучить сотрудника под специфику моего бизнеса?</summary>
-      <p>Да. Мы обучаем AI вашим материалам: скриптам, инструкциям, базе знаний. Обучение занимает минуты.</p>
-    </details>
-
-    <details>
-      <summary>Что насчёт безопасности данных?</summary>
-      <p>Все данные хранятся конфиденциально и не передаются третьим лицам. AI работает в рамках вашего бизнеса и по вашим правилам.</p>
-    </details>
-
-    <details>
-      <summary>Сколько это стоит?</summary>
-      <p>Стоимость зависит от выбранного сотрудника и набора функций. В любом случае — это <strong>в 5–10 раз дешевле</strong> найма реального сотрудника.</p>
-    </details>
-
-    <details>
-      <summary>Нужна ли интеграция с CRM или мессенджерами?</summary>
-      <p>Да, и мы сделаем её за вас. AI легко подключается к привычным сервисам: Telegram, WhatsApp, CRM, e-mail.</p>
-    </details>
-
-    <details>
-      <summary>Что делать, если я не нашёл нужного сотрудника?</summary>
-      <p>Мы можем обучить AI-сотрудника любой профессии по индивидуальному заказу.</p>
-    </details>
-
-    <details>
-      <summary>Можно ли попробовать перед тем, как платить?</summary>
-      <p>Да. Вы можете протестировать работу AI-сотрудника бесплатно и оценить результат.</p>
-    </details>
-
-    <!-- CTA под FAQ -->
-    <div style="margin-top:24px">
-      <a class="btn" href="#catalog">Собрать свою AI-команду</a>
-    </div>
-  </div>
-</section>
-
-
-  <footer class="footer">
-    <div class="container grid">
-      <div>
-        <h3>Контакты</h3>
-        <p>+375 (33) 690-29-12<br>info@aiemployee.by<br>г. Минск, Республика Беларусь</p>
-      </div>
-      <div>
-        <h3>Соцсети</h3>
-        <p><a href="https://t.me/aiemployee_by" target="_blank" rel="noopener">Telegram</a></p>
-        <p><a href="https://www.instagram.com/aiemployee_by/" target="_blank" rel="noopener">Instagram</a></p>
-        <p><a href="https://www.facebook.com/people/AIEmployee/61581270353814/" target="_blank" rel="noopener">Facebook</a></p>
-        
-      </div>
-      <div style="text-align:right"><h3>Юридическая информация</h3><p>© 2025 AIEmployee · <a href="/privacy.html" class="privacy">Политика конфиденциальности</a> · <a href="/cookies-policy.html" class="cookies-policy-link">Политика cookies</a> · <a href="#" id="cookie-footer-link" class="cookie-footer-link">Настройки cookies</a></p></div>
+      <a href="#" id="cookie-footer-link" class="cookie-footer-link">Настройки cookies</a> · 
+      <a href="#" onclick="alert('Откроется страница политики на реальном сайте');return false;">Политика cookies</a>
     </div>
   </footer>
 
-  <button class="float-cart" id="floatOpen" aria-label="Ваша команда">
-    <span>Ваша команда</span>
-    <span class="count" id="floatCount">0</span>
-  </button>
-
-  <div class="aside">
-    <div class="backdrop" id="backdrop"></div>
-    <aside class="panel">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <h3 id="panelTitle">Ваша команда (0)</h3>
-        <button class="btn ghost" id="closeAside">Закрыть</button>
-      </div>
-      <div class="list" id="selList"></div>
-      <form class="form" id="leadForm">
-        <label>Имя и должность</label>
-        <input name="name" placeholder="Иван Петров, основатель">
-        <label>Контактные данные</label>
-        <input name="contact" placeholder="+375..., email или Telegram">
-        <label>Комментарий</label>
-        <textarea name="comment" placeholder="Коротко о задачах, сроках, интеграциях"></textarea>
-        <p id="pd-consent" class="small muted" style="margin-top:8px">
-  Отправляя форму, вы соглашаетесь на обработку персональных данных и подтверждаете ознакомление с
-  <a href="/privacy.html" target="_blank" rel="noopener">Политикой конфиденциальности</a>.
-        </p>
-        <button class="btn" id="sendBtn" type="submit">Отправить заявку</button>
-      </form>
-    </aside>
-  </div>
-
-  
-  <!-- Cookie Consent -->
   <div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Уведомление о cookies" hidden>
     <div class="cookie-banner__text">
       Мы используем cookies для корректной работы и улучшения сервиса.
       <span class="cookie-banner__hint">Нажмите «Принять все», либо откройте «Настройки» для детального выбора.</span>
-      <a href="/cookies-policy.html" target="_blank" rel="noopener">Политика cookies</a>.
     </div>
     <div class="cookie-banner__actions">
       <button id="cookie-accept-all" class="btn btn-primary">Принять все</button>
@@ -358,7 +87,7 @@
       <p>Все дополнительные cookies включены по умолчанию. Чтобы отказаться, снимите галочки и сохраните выбор.</p>
 
       <div class="cookie-modal__actions">
-        <button type="button" id="cookie-save-master" class="btn btn-primary btn-lg">Улучшенный опыт</button>
+        <button type="button" id="cookie-save-master" class="btn btn-primary">Улучшенный опыт</button>
         <p class="muted" style="font-size:.9rem; margin-top:6px">Рекомендуется для удобства и лучшего сервиса</p>
       </div>
 
@@ -368,14 +97,14 @@
           <input type="checkbox" id="consent-ym" checked>
           <span>
             <span class="cookie-opt__title">Яндекс.Метрика</span>
-            <span class="cookie-opt__desc">Собирает обезличенные данные о посещаемости, кликах и навигации для анализа и оптимизации.</span>
+            <span class="cookie-opt__desc">Собирает обезличенные данные о посещаемости сайта, кликах, навигации и времени нахождения на страницах. Используется для анализа и оптимизации структуры ресурса.</span>
           </span>
         </label>
         <label class="cookie-opt prov-grid">
           <input type="checkbox" id="consent-ga4" checked>
           <span>
             <span class="cookie-opt__title">Google Analytics 4</span>
-            <span class="cookie-opt__desc">Фиксирует события и взаимодействия, помогает строить отчёты и сегменты поведения.</span>
+            <span class="cookie-opt__desc">Фиксирует события и взаимодействия, позволяет отслеживать путь пользователя, строить отчёты и сегментацию для глубокой аналитики поведения.</span>
           </span>
         </label>
       </div>
@@ -386,14 +115,14 @@
           <input type="checkbox" id="consent-gads" checked>
           <span>
             <span class="cookie-opt__title">Google Ads</span>
-            <span class="cookie-opt__desc">Связывает посещения с кампаниями, измеряет конверсии и формирует списки ремаркетинга.</span>
+            <span class="span cookie-opt__desc">Позволяет связать посещения с рекламными кампаниями, измерять конверсии, формировать списки ремаркетинга и оптимизировать затраты на рекламу.</span>
           </span>
         </label>
         <label class="cookie-opt prov-grid">
           <input type="checkbox" id="consent-meta" checked>
           <span>
             <span class="cookie-opt__title">Meta Pixel</span>
-            <span class="cookie-opt__desc">Отслеживает действия после клика по рекламе в Facebook/Instagram для оценки эффективности.</span>
+            <span class="cookie-opt__desc">Отслеживает действия пользователей после клика по рекламе в Facebook и Instagram, позволяет формировать аудитории и оценивать эффективность объявлений.</span>
           </span>
         </label>
       </div>
@@ -405,44 +134,58 @@
     </div>
   </div>
 
+  <script>
+  (function(){
+    const LS_KEY = 'cookieConsent.v4';
+    const q = (s) => document.querySelector(s);
+    const banner = q('#cookie-banner');
+    const modal  = q('#cookie-modal');
+    const btnAll = q('#cookie-accept-all');
+    const btnOpen= q('#cookie-open-settings');
+    const btnSaveMaster=q('#cookie-save-master');
+    const btnSaveCustom=q('#cookie-save-custom');
+    const btnCancel=q('#cookie-cancel');
+    const cbYM=q('#consent-ym');
+    const cbGA4=q('#consent-ga4');
+    const cbGADS=q('#consent-gads');
+    const cbMETA=q('#consent-meta');
 
-  <!-- Lazy providers: loaded only after consent -->
-  <script type="text/plain" data-consent="analytics" data-consent-provider="ym">
-    (function(){
-      var s=document.createElement('script');
-      s.async=1; s.src="https://mc.yandex.ru/metrika/tag.js";
-      s.onload=function(){
-        try{ ym(104158481, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); }catch(e){}
-      };
-      document.head.appendChild(s);
-    })();
-  </script>
+    const getConsent = () => { try { return JSON.parse(localStorage.getItem(LS_KEY)); } catch(_) { return null; } };
+    const setConsent = (obj) => localStorage.setItem(LS_KEY, JSON.stringify(obj));
 
-  <script type="text/plain" data-consent="marketing" data-consent-provider="gads">
-    (function(){
-      if(!window.__gtagLoaded){
-        var s=document.createElement('script'); s.async=1;
-        s.src="https://www.googletagmanager.com/gtag/js?id=AW-948603373";
-        s.onload=function(){ window.__gtagLoaded=true; go(); };
-        document.head.appendChild(s);
-      } else { go(); }
-      function go(){
-        window.dataLayer=window.dataLayer||[];
-        function gtag(){ dataLayer.push(arguments); } window.gtag=window.gtag||gtag;
-        gtag('js', new Date());
-        gtag('config','AW-948603373');
-      }
-    })();
-  </script>
+    const applyConsent = (c) => {
+      document.getElementById('st-analytics').textContent = c.analytics;
+      document.getElementById('st-marketing').textContent = c.marketing;
+      document.getElementById('st-ym').textContent = c.providers.ym;
+      document.getElementById('st-ga4').textContent = c.providers.ga4;
+      document.getElementById('st-gads').textContent = c.providers.gads;
+      document.getElementById('st-meta').textContent = c.providers.meta;
+    };
 
-  <script type="text/plain" data-consent="marketing" data-consent-provider="meta">
-    (function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=1;
-    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)})(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init','637099655862791');
-    fbq('track','PageView');
+    const show=el=>el.removeAttribute('hidden');
+    const hide=el=>el.setAttribute('hidden','');
+
+    const existing=getConsent();
+    if(existing){hide(banner);applyConsent(existing);}else{show(banner);}
+
+    btnAll.addEventListener('click',()=>{
+      const c={analytics:true,marketing:true,providers:{ym:true,ga4:true,gads:true,meta:true}};
+      setConsent(c);applyConsent(c);hide(banner);
+    });
+
+    btnOpen.addEventListener('click',()=>{show(modal);});
+    btnSaveMaster.addEventListener('click',()=>{
+      const c={analytics:true,marketing:true,providers:{ym:true,ga4:true,gads:true,meta:true}};
+      setConsent(c);applyConsent(c);hide(modal);hide(banner);
+    });
+
+    btnSaveCustom.addEventListener('click',()=>{
+      const c={analytics:(cbYM.checked||cbGA4.checked),marketing:(cbGADS.checked||cbMETA.checked),providers:{ym:cbYM.checked,ga4:cbGA4.checked,gads:cbGADS.checked,meta:cbMETA.checked}};
+      setConsent(c);applyConsent(c);hide(modal);hide(banner);
+    });
+    btnCancel.addEventListener('click',()=>hide(modal));
+    document.getElementById('reset-consent').addEventListener('click',()=>{localStorage.removeItem(LS_KEY);location.reload();});
+  })();
   </script>
-<script src="assets/js/app.js?v=build-20250818T195735Z"></script>
 </body>
 </html>
