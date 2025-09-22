@@ -24,10 +24,10 @@
     .cookie-banner__hint{display:block;color:#444}
     .cookie-banner__actions{display:flex;gap:8px;align-items:center}
     .cookie-modal{position:fixed;inset:0;background:rgba(0,0,0,.3);display:grid;place-items:center;z-index:10000}
-    .cookie-modal__dialog{width: clamp(360px, 48vw, 560px);background:#fff;color:#111;border-radius:16px;padding: 16px;box-shadow:0 20px 60px rgba(0,0,0,.15) max-height: min(86vh, 640px); overflow:auto; }
-    .cookie-opt{display:grid;grid-template-columns: 20px 1fr;gap:10px;align-items:start;margin:12px 0}
+    .cookie-modal__dialog{width:min(680px,92vw);background:#fff;color:#111;border-radius:16px;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,.15)}
+    .cookie-opt{display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:start;margin:12px 0}
     .cookie-opt__title{font-weight:600;display:block}
-    .cookie-opt__desc{display:block;font-size: .85rem;color:#444}
+    .cookie-opt__desc{display:block;font-size:.9rem;color:#444}
     .cookie-modal__actions{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}
     .providers{border:1px solid #e5e7eb;border-radius:12px;padding:10px;background:#fff;margin-top:6px}
     .prov-head{font-size:.92rem;color:#222;margin:2px 0 8px}
@@ -326,11 +326,11 @@
         <input name="contact" placeholder="+375..., email или Telegram">
         <label>Комментарий</label>
         <textarea name="comment" placeholder="Коротко о задачах, сроках, интеграциях"></textarea>
-        <button aria-describedby="pd-consent" class="btn" id="sendBtn" type="submit">Отправить заявку</button><p id="pd-consent" class="small muted" style="margin-top:8px">
+        <p id="pd-consent" class="small muted" style="margin-top:8px">
         Отправляя форму, вы соглашаетесь на обработку персональных данных и подтверждаете ознакомление с
         <a href="/privacy.html" target="_blank" rel="noopener">Политикой конфиденциальности</a>.
         </p>
-        
+        <button class="btn" id="sendBtn" type="submit">Отправить заявку</button>
       </form>
     </aside>
   </div>
@@ -404,7 +404,13 @@
 
 
   <!-- Lazy providers: loaded only after consent -->
+  
+<script type="text/plain" data-consent="analytics" data-consent-provider="ym">…</script>
+<script type="text/plain" data-consent="marketing" data-consent-provider="gads">…</script>
+<script type="text/plain" data-consent="marketing" data-consent-provider="meta">…</script>
 
+
+  
   <script type="text/plain" data-consent="analytics" data-consent-provider="ym">
     (function(){
       var s=document.createElement('script');
@@ -442,8 +448,7 @@
     fbq('track','PageView');
   </script>
 
-<script src="assets/js/app.js?v=build-20250920"></script>
-<script src="/assets/js/cookie-consent-hotfix.min.js?v=1"></script>
-
+<script src="assets/js/app.js?v=build-20250922-appR"></script>
+<script src=\"assets/js/cookie-consent.v6.js?v=1\"></script>
 </body>
 </html>
