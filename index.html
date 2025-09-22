@@ -305,7 +305,7 @@
         <p><a href="https://www.facebook.com/people/AIEmployee/61581270353814/" target="_blank" rel="noopener">Facebook</a></p>
         
       </div>
-      <div style="text-align:right"><h3>Юридическая информация</h3><p>© 2025 AIEmployee · <a href="#" class="/privacy.html">Политика конфиденциальности</a> · <a href="/cookies-policy.html" class="cookies-policy-link">Политика cookies</a> · <a href="#" id="cookie-footer-link" class="cookie-footer-link">Настройки cookies</a></p></div>
+      <div style="text-align:right"><h3>Юридическая информация</h3><p>© 2025 AIEmployee · <a href="/privacy.html" class="privacy">Политика конфиденциальности</a> · <a href="/cookies-policy.html" class="cookies-policy-link">Политика cookies</a> · <a href="#" id="cookie-footer-link" class="cookie-footer-link">Настройки cookies</a></p></div>
     </div>
   </footer>
 
@@ -329,7 +329,10 @@
         <input name="contact" placeholder="+375..., email или Telegram">
         <label>Комментарий</label>
         <textarea name="comment" placeholder="Коротко о задачах, сроках, интеграциях"></textarea>
-        <p class="small">Если токен Telegram не настроен — текст заявки скопируется в буфер обмена.</p>
+        <p id="pd-consent" class="small muted" style="margin-top:8px">
+  Отправляя форму, вы соглашаетесь на обработку персональных данных и подтверждаете ознакомление с
+  <a href="/privacy.html" target="_blank" rel="noopener">Политикой конфиденциальности</a>.
+        </p>
         <button class="btn" id="sendBtn" type="submit">Отправить заявку</button>
       </form>
     </aside>
